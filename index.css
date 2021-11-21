@@ -62,7 +62,7 @@ html, body
     background-color: rgba(0, 0, 0, 0.8);
     overflow: auto;
 }
-/* ITEM */
+/* INFO - ITEM */
 #tituloPagina 
 {
     display: flex;
@@ -81,14 +81,14 @@ html, body
 .box label 
 {
     height: 30px;
-    width: 120px;
+    width: 110px;
     display: flex;
     align-items: center;
 }
 .box input, .box select 
 {
     height: 30px;
-    width: 240px;
+    width: 210px;
     font-size: 13.5px;
     text-transform: uppercase;
 }
@@ -98,14 +98,14 @@ html, body
 }
 .boton 
 {
-    width: 115px;
+    width: 100px;
     height: 35px;
     cursor: pointer;
     border: 0.1px solid #cccccc;
 }
 .opciones 
 { 
-    width: 360px;
+    width: 320px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -129,7 +129,7 @@ html, body
 /* BUSCAR CODIGO */
 #codigo 
 {
-    width: 205px;
+    width: 175px;
     margin-right: 5px;
 }
 #botonBuscar 
@@ -142,21 +142,21 @@ html, body
     color: #ffffff;   
 }
 /* ITEM CON DEFECTO */
-.boxDefecto 
+#boxDefecto 
 {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-bottom: 10px;
-    width: 360px;
-    padding-left: 120px;
+    width: 320px;
+    padding-left: 110px;
 }
-.boxDefecto input 
+#boxDefecto input 
 {
     width: 15px;
     height: 15px;
 }
-.boxDefecto div 
+#boxDefecto div 
 {
     margin-left: 5px;
     font-size: 12px;
@@ -167,20 +167,25 @@ html, body
     font-size: 24px;
     font-weight: bold;
 }
+#tituloSemana 
+{
+    font-size: 24px;
+    font-weight: bold;
+}
 #tituloDistribuidor 
 {
     font-size: 20px;
     margin-bottom: 15px;
 }
+#tablas
+{
+    width: 100vw;
+    max-width: 600px;
+}
 #tabla, #tablaDefectos 
 {
     width: 100%;
-    max-width: 600px;
     border-collapse: collapse;
-    margin-bottom: 15px;
-}
-#tablaDefectos 
-{
     margin-bottom: 15px;
 }
 #total 
@@ -213,7 +218,7 @@ html, body
 }
 .tablaPdf th:nth-child(1), td:nth-child(1) 
 {
-    width: 70px;
+    width: 60px;
 }
 .tablaPdf td:nth-child(1) 
 {
@@ -221,7 +226,7 @@ html, body
 }
 .tablaPdf th:nth-child(2), td:nth-child(2) 
 {
-    width: 398px;
+    min-width: 128px;
 }
 .tablaPdf td:nth-child(2) 
 {
@@ -229,7 +234,7 @@ html, body
 }
 .tablaPdf th:nth-child(3), td:nth-child(3) 
 {
-    width: 90px;
+    width: 80px;
 }
 .tablaPdf td:nth-child(3) 
 {
@@ -252,12 +257,10 @@ html, body
     align-items: center;
     background-color: #ffffff;
     width: 100%;
-    max-width: 700px;
+    max-width: 600px;
     padding: 10px;
     border: 0.1px solid #000000; 
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;   
+    margin-top: 10px;  
 }
 #tituloConsulta 
 {
@@ -352,6 +355,10 @@ html, body
     display: none;
 }
 #tituloInforme 
+{
+    display: none;
+}
+#tituloSemana 
 {
     display: none;
 }

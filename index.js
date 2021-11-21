@@ -16,6 +16,7 @@ const botonAgregar = document.getElementById('botonAgregar');
 // PDF
 const pdf = document.getElementById('pdf');
 const tituloInforme = document.getElementById('tituloInforme');
+const tituloSemana = document.getElementById('tituloSemana');
 const tituloDistribuidor = document.getElementById('tituloDistribuidor');
 const tabla = document.getElementById('tabla');
 const tbody = document.getElementById('tbody');
@@ -32,15 +33,13 @@ const botonCerrar = document.getElementById('botonCerrar');
 tipoInforme.addEventListener('change', function() 
 { 
     var textoTipoInforme = tipoInforme.options[tipoInforme.selectedIndex].text;
-    var textoSemana = semana.options[semana.selectedIndex].text;
-    tituloInforme.innerHTML = 'Informe de '+textoTipoInforme+' - Semana N° '+textoSemana;
+    tituloInforme.innerHTML = 'Informe de '+textoTipoInforme;
     habilitar(); 
 });
 semana.addEventListener('change', function() 
 {
-    var textoTipoInforme = tipoInforme.options[tipoInforme.selectedIndex].text;
     var textoSemana = semana.options[semana.selectedIndex].text;
-    tituloInforme.innerHTML = 'Informe de '+textoTipoInforme+' - Semana N° '+textoSemana;
+    tituloSemana.innerHTML = 'Semana N° '+textoSemana;
     habilitar(); 
 });
 distribuidor.addEventListener('change', function() 

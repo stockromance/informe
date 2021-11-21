@@ -71,7 +71,7 @@
                     <label for="cantidad">Item Cantidad</label>
                     <input type="number" name="cantidad" id="cantidad" disabled>
                 </div>
-                <div class="boxDefecto">                    
+                <div class="box" id="boxDefecto">                    
                     <input type="checkbox" name="defecto" id="defecto" disabled><div>Item con defecto</div> 
                 </div>  
                 <div class="box" id="boxObservacion">
@@ -85,30 +85,33 @@
                 </div>
             </div>
             <div id="pdf">
-                <div id="tituloInforme">Informe de - Semana N°</div>
+                <div id="tituloInforme">Informe de</div>
+                <div id="tituloSemana">Semana N°</div>
                 <div id="tituloDistribuidor">Distribuidor:</div>
-                <table class="tablaPdf" id="tabla">
-                    <thead>
-                        <tr>
-                            <th>Codigo</th>
-                            <th>Item</th>
-                            <th>Cantidad</th>
-                            <th>-</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbody"></tbody>
-                </table>
-                <table class="tablaPdf" id="tablaDefectos">
-                    <thead>
-                        <tr>
-                            <th>Codigo</th>
-                            <th>Item con Defecto</th>
-                            <th>Cantidad</th>
-                            <th>-</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tbodyDefectos"></tbody>
-                </table>
+                <div id="tablas">
+                    <table class="tablaPdf" id="tabla">
+                        <thead>
+                            <tr>
+                                <th>Codigo</th>
+                                <th>Item</th>
+                                <th>Cantidad</th>
+                                <th>-</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody"></tbody>
+                    </table>
+                    <table class="tablaPdf" id="tablaDefectos">
+                        <thead>
+                            <tr>
+                                <th>Codigo</th>
+                                <th>Item con Defecto</th>
+                                <th>Cantidad</th>
+                                <th>-</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbodyDefectos"></tbody>
+                    </table>
+                </div>                
                 <div id="total">Total Items: 0</div>
             </div>
         </div>
