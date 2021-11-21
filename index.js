@@ -724,3 +724,52 @@ function eliminarFila(e)
         tablaDefectos.style.display = 'none';
     }
 }
+// MODAL
+consulta.addEventListener('keydown', function(e)
+{  
+    var code = e.keyCode;
+    
+    if (code == 13)
+    {
+        consultarItem();      
+    }
+});
+function limpiarModal()
+{
+
+}
+function itemSeleccionado(e)
+{
+    var td = e.parentNode; 
+    var tr = td.parentNode;
+    
+    codigo.value = tr.cells[0].innerHTML;
+    buscarItem();
+    modal.style.display = 'none'; 
+}
+function consultarItem()
+{
+    var query = consulta.value.toUpperCase();
+    if(query.length > 2) 
+    {
+        tbodyConsulta.innerHTML = '';
+        var query = consulta.value.toUpperCase();
+    
+        var busqueda = items.filter(function(e)
+        {
+            return e.nombre.indexOf(query) > -1;
+        });
+    
+        busqueda.forEach(function(e)
+        {
+            var row = tbodyConsulta.insertRow(0);
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            cell1.innerHTML = e.id;
+            cell2.innerHTML = e.nombre;  
+            cell3.innerHTML = '<td><button class="agregar" onclick="itemSeleccionado(this)"><i class="fas fa-plus"></i></button></td>';
+        });
+        sortTable('tablaConsulta');
+    }
+}

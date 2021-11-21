@@ -50,10 +50,9 @@ html, body
     top: 0; 
     width: 100%;
     height: 100%;
-    display: none;
+    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;       
+    align-items: center;       
     background-color: rgb(0,0,0);
     background-color: rgba(0, 0, 0, 0.8);
     overflow: auto;
@@ -240,6 +239,108 @@ html, body
 {
     text-align: center;
 }
+/* MODAL */
+.modalContenido 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 700px;
+    padding: 10px;
+    border: 0.1px solid #000000; 
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;   
+}
+#tituloConsulta 
+{
+    display: flex;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+#boxConsulta 
+{
+    display: flex;
+    flex-direction: row;
+}
+#consulta 
+{
+    height: 30px;
+    width: 240px;
+    text-transform: uppercase;
+    padding-left: 3.5px;    
+}
+#botonConsulta 
+{
+    width: 75px;
+    height: 30px;
+    cursor: pointer;
+    border: 0.1px solid #cccccc; 
+    background-color: #531dab;
+    color: #ffffff;
+    margin-left: 5px;   
+}
+#tablaConsulta 
+{
+    width: 100%;
+    max-width: 700px;
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#tablaConsulta thead th 
+{
+    text-align: center;
+}
+#tablaConsulta th, td 
+{
+    border: 0.1px solid #000000;
+    padding: 5px;
+    text-transform: uppercase;
+}
+#tablaConsulta th:nth-child(1), td:nth-child(1) 
+{
+    width: 70px;
+}
+#tablaConsulta td:nth-child(1) 
+{
+    text-align: center;
+}
+#tablaConsulta th:nth-child(2), td:nth-child(2) 
+{
+    min-width: 110px;
+}
+#tablaConsulta td:nth-child(2) 
+{
+    text-align: left;
+}
+#tablaConsulta th:nth-child(3), td:nth-child(3) 
+{
+    width: 40px;
+}
+#tablaConsulta td:nth-child(3) 
+{
+    text-align: center;
+}
+.agregar 
+{
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 2px;
+}
+.agregar i 
+{
+    font-size: 12px;
+}
+#botonCerrar
+{    
+    height: 30px;
+    background-color: #cf1322;
+    color: #ffffff;
+}
 /* OCULTOS */
 #boxObservacion 
 {
@@ -258,5 +359,9 @@ html, body
     display: none;
 }
 #tablaDefectos {
+    display: none;
+}
+#modal
+{    
     display: none;
 }
