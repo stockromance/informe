@@ -24,15 +24,14 @@
                     <label for="semana">Semana</label>
                     <select name="semana" id="semana">
                         <option value="0"></option>
-                        <option value="1">45/2021</option>
-                        <option value="2">46/2021</option>
-                        <option value="3">47/2021</option>
-                        <option value="4">48/2021</option>
-                        <option value="5">49/2021</option>
-                        <option value="6">50/2021</option>
-                        <option value="7">51/2021</option>
-                        <option value="8">52/2021</option>
-                        <option value="9">53/2021</option>
+                        <option value="1">46/2021</option>
+                        <option value="2">47/2021</option>
+                        <option value="3">48/2021</option>
+                        <option value="4">49/2021</option>
+                        <option value="5">50/2021</option>
+                        <option value="6">51/2021</option>
+                        <option value="7">52/2021</option>
+                        <option value="8">53/2021</option>
                     </select> 
                 </div>
                 <div class="box">
@@ -67,22 +66,20 @@
                 <div class="box">
                     <label for="nombre">Item Nombre</label>
                     <input type="text" name="nombre" id="nombre" disabled> 
-                </div>
+                </div>                               
                 <div class="box">
                     <label for="cantidad">Item Cantidad</label>
                     <input type="number" name="cantidad" id="cantidad" disabled>
                 </div>
-                <div id="boxDefecto">
-                    <div class="boxDefecto">                    
-                        <input type="checkbox" name="defecto" id="defecto"><div>Item con defecto</div> 
-                    </div>
-                    <div class="box">
-                        <label for="tipoDefecto">Tipo de Defecto</label>
-                        <input type="text" name="tipoDefecto" id="tipoDefecto" disabled> 
-                    </div>
-                </div>                
+                <div class="boxDefecto">                    
+                    <input type="checkbox" name="defecto" id="defecto" disabled><div>Item con defecto</div> 
+                </div>  
+                <div class="box" id="boxObservacion">
+                    <label for="observacion">Observacion</label>
+                    <input type="text" name="observacion" id="observacion" disabled> 
+                </div>                            
                 <div class="opciones">
-                    <button class="boton" id="botonLimpiar">Limpiar Tabla</button>
+                    <button class="boton" id="botonLimpiar">Borrar Todo</button>
                     <button class="boton" id="botonCrear">Crear PDF</button>
                     <button class="boton" id="botonAgregar">Agregar</button>
                 </div>
@@ -90,30 +87,28 @@
             <div id="pdf">
                 <div id="tituloInforme">Informe de - Semana N°</div>
                 <div id="tituloDistribuidor">Distribuidor:</div>
-                <div>
-                    <table class="tablaPdf" id="tabla">
-                        <thead>
-                            <tr>
-                                <th>Codigo</th>
-                                <th>Item</th>
-                                <th>Cantidad</th>
-                                <th>-</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbody"></tbody>
-                    </table>
-                    <table class="tablaPdf" id="tablaDefectos">
-                        <thead>
-                            <tr>
-                                <th>Codigo</th>
-                                <th>Item con Defecto</th>
-                                <th>Cantidad</th>
-                                <th>-</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbodyDefectos"></tbody>
-                    </table>
-                </div>
+                <table class="tablaPdf" id="tabla">
+                    <thead>
+                        <tr>
+                            <th>Codigo</th>
+                            <th>Item</th>
+                            <th>Cantidad</th>
+                            <th>-</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody"></tbody>
+                </table>
+                <table class="tablaPdf" id="tablaDefectos">
+                    <thead>
+                        <tr>
+                            <th>Codigo</th>
+                            <th>Item con Defecto</th>
+                            <th>Cantidad</th>
+                            <th>-</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyDefectos"></tbody>
+                </table>
                 <div id="total">Total Items: 0</div>
             </div>
         </div>

@@ -7,9 +7,9 @@ const codigo = document.getElementById('codigo');
 const botonBuscar = document.getElementById('botonBuscar');
 const nombre = document.getElementById('nombre');
 const cantidad = document.getElementById('cantidad');
-const boxDefecto = document.getElementById('boxDefecto');
+const boxObservacion = document.getElementById('boxObservacion');
 const defecto = document.getElementById('defecto');
-const tipoDefecto = document.getElementById('tipoDefecto');
+const observacion = document.getElementById('observacion');
 const botonLimpiar = document.getElementById('botonLimpiar');
 const botonCrear = document.getElementById('botonCrear');
 const botonAgregar = document.getElementById('botonAgregar'); 
@@ -19,6 +19,7 @@ const tituloInforme = document.getElementById('tituloInforme');
 const tituloDistribuidor = document.getElementById('tituloDistribuidor');
 const tabla = document.getElementById('tabla');
 const tbody = document.getElementById('tbody');
+const tablaDefectos = document.getElementById('tablaDefectos');
 const tbodyDefectos = document.getElementById('tbodyDefectos');
 const total = document.getElementById('total');
 // MODAL
@@ -27,67 +28,59 @@ const consulta = document.getElementById('consulta');
 const botonConsulta = document.getElementById('botonConsulta');
 const tbodyConsulta = document.getElementById('tbodyConsulta');  
 const botonCerrar = document.getElementById('botonCerrar'); 
-// CLIC BOTON
-botonBuscar.addEventListener('click', function() 
+//SELECT
+tipoInforme.addEventListener('change', function() 
+{ 
+    var textoTipoInforme = tipoInforme.options[tipoInforme.selectedIndex].text;
+    var textoSemana = semana.options[semana.selectedIndex].text;
+    tituloInforme.innerHTML = 'Informe de '+textoTipoInforme+' - Semana N° '+textoSemana;
+    habilitar(); 
+});
+semana.addEventListener('change', function() 
 {
-    if(codigo.disabled == false)
-    {
-        tbodyConsulta.innerHTML = '';        
-        consulta.value = ''; 
-        modal.style.display = 'block';
-        consulta.focus(); 
-    }
+    var textoTipoInforme = tipoInforme.options[tipoInforme.selectedIndex].text;
+    var textoSemana = semana.options[semana.selectedIndex].text;
+    tituloInforme.innerHTML = 'Informe de '+textoTipoInforme+' - Semana N° '+textoSemana;
+    habilitar(); 
+});
+distribuidor.addEventListener('change', function() 
+{
+    var textoDistribuidor = distribuidor.options[distribuidor.selectedIndex].text;
+    tituloDistribuidor.innerHTML = 'Distribuidor: '+textoDistribuidor; 
+    habilitar() 
+});
+//CHECK
+defecto.addEventListener('change', function()
+{
+    if (defecto.checked == true)
+    {        
+        boxObservacion.style.display = 'flex'
+        observacion.disabled = false;
+        observacion.focus();        
+    } 
     else
     {
-        modal.style.display = 'none'; 
+        boxObservacion.style.display = 'none'
+        observacion.disabled = true;
+        observacion.value = '';
+        
     }
 });
-botonLimpiar.addEventListener('click', function()
-{ 
-    var filas = tbody.rows.length; 
-    
-    if(filas > 0)
-    {
-        var confirmar = confirm('Limpiar informacion de tabla?');
-
-        if(confirmar == true)
-        {
-            tbody.innerHTML = '';
-            tbodyDefectos.innerHTML = '';
-        }
-        else
-        {
-            //...
-        }
-    }
-    else
-    {
-        //...
-    }
-    
-    
-});
-botonCrear.addEventListener('click', function() { crearPDF(); });
-botonAgregar.addEventListener('click', function() { agregarItem() });
-botonConsulta.addEventListener('click', function() { consultarItem();  });
-botonCerrar.addEventListener('click', function() 
-{ 
-    modal.style.display = 'none';
-    tbodyConsulta.innerHTML = '';        
-    consulta.value = ''; 
-});
-//HABILITAR INPUT CODIGO
-function habilitarCodigo() 
+function habilitar()
 {
-    boxDefecto.style.display = 'none';
-
-    if (tipoInforme.value == 2)
-    {
-        boxDefecto.style.display = 'block';
-    }
     if (tipoInforme.value != 0 && semana.value != 0 && distribuidor.value != 0 && distribuidor.value != 13)
     {
         codigo.disabled = false;
+        defecto.disabled = false;
+        
+        if (tipoInforme.value == 2)
+        {
+            defecto.disabled = false;
+        }
+        else 
+        {
+            defecto.disabled = true;
+        }
     }
     else 
     {
@@ -99,68 +92,6 @@ function habilitarCodigo()
         cantidad.disabled = true;
     }
 }
-function habilitarCantidad() 
-{
-
-}
-//TIPO DE INFORME
-tipoInforme.addEventListener('change', function()
-{
-    var textoTipoInforme = tipoInforme.options[tipoInforme.selectedIndex].text;
-    var textoSemana = semana.options[semana.selectedIndex].text;
-
-    tituloInforme.innerHTML = 'INFORME DE '+textoTipoInforme+' - SEMANA N° '+textoSemana;
-
-    habilitarCodigo();
-
-    if(tipoInforme.value == 0) { tipoInforme.focus() }
-    else if(tipoInforme.value == 13) { tipoInforme.focus() }
-    else if(semana.value == 0) { semana.focus() }
-    else if(distribuidor.value == 0) { distribuidor.focus() }
-    else if(codigo.value == '') { codigo.focus() }
-    else if(nombre.value == '') { nombre.focus() }
-    else if(cantidad.value == '') { cantidad.focus() }
-    else {}
-
-
-});
-//SEMANA
-semana.addEventListener('change', function()
-{
-    var textoTipoInforme = tipoInforme.options[tipoInforme.selectedIndex].text;
-    var textoSemana = semana.options[semana.selectedIndex].text;
-
-    tituloInforme.innerHTML = 'Informe de '+textoTipoInforme+' - Semana N° '+textoSemana;
-
-    habilitarCodigo();
-
-    if(semana.value == 0) { semana.focus() }
-    else if(tipoInforme.value == 0) { tipoInforme.focus() }
-    else if(tipoInforme.value == 13) { tipoInforme.focus() }    
-    else if(distribuidor.value == 0) { distribuidor.focus() }
-    else if(codigo.value == '') { codigo.focus() }
-    else if(nombre.value == '') { nombre.focus() }
-    else if(cantidad.value == '') { cantidad.focus() }
-    else {}
-});
-//DISTRIBUIDOR
-distribuidor.addEventListener('change', function()
-{
-    var textoDistribuidor = distribuidor.options[distribuidor.selectedIndex].text;
-
-    tituloDistribuidor.innerHTML = 'Distribuidor: '+textoDistribuidor;
-
-    habilitarCodigo();
-
-    if(distribuidor.value == 0) { distribuidor.focus() }
-    else if(tipoInforme.value == 0) { tipoInforme.focus() }
-    else if(tipoInforme.value == 13) { tipoInforme.focus() }
-    else if(semana.value == 0) { semana.focus() }    
-    else if(codigo.value == '') { codigo.focus() }
-    else if(nombre.value == '') { nombre.focus() }
-    else if(cantidad.value == '') { cantidad.focus() }
-    else {}
-});
 //CODIGO
 codigo.addEventListener('keydown', function(e)
 {
@@ -170,10 +101,18 @@ codigo.addEventListener('keydown', function(e)
     {
         if(codigo.value.length == 5)
         {
-            if(codigo.value == '') { codigo.focus() }
-            else if(nombre.value == '') { nombre.focus() }
-            else if(cantidad.value == '') { cantidad.focus() }
-            else {}
+            if(nombre.value == '') 
+            {
+                nombre.focus();
+            }
+            else if(cantidad.value == '')
+            { 
+                cantidad.focus(); 
+            }
+            else 
+            {
+                //...
+            }
         }
         else
         {
@@ -233,17 +172,42 @@ codigo.addEventListener('input', function()
     {
         //...
     }
-});  
+}); 
+function buscarItem()
+{
+    var filtro = items.filter(items => items.id == codigo.value);
+
+    if(filtro.length > 0)
+    {
+        nombre.value = filtro[0].nombre.toUpperCase();
+        cantidad.disabled = false;                    
+        cantidad.focus();
+    }
+    else
+    {
+        nombre.disabled = false;
+        nombre.focus();                    
+    }
+} 
 //NOMBRE ITEM
 nombre.addEventListener('keydown', function(e)
 {  
     var code = e.keyCode;
     
-    if (code == 13){
-        if(nombre.value == '') { nombre.focus() } 
-        else if(cantidad.value == '') { cantidad.focus() }
-        else if(codigo.value == '') { codigo.focus() }                   
-        else {}       
+    if (code == 13)
+    {
+        if(cantidad.value == '') 
+        { 
+            cantidad.focus(); 
+        }
+        else 
+        {
+            //...
+        }       
+    }
+    else
+    {
+        //...
     }
 });
 nombre.addEventListener('input', function()
@@ -266,10 +230,28 @@ cantidad.addEventListener('keydown', function(e)
 
     if (key == 13)
     {
-        if(cantidad.value == '') { cantidad.focus() }
-        else if(codigo.value == '') { codigo.focus() }
-        else if(nombre.value == '') { nombre.focus() }            
-        else { agregarItem(); }       
+        if(defecto.disabled == true)
+        {
+            agregarItem();
+        }
+        else
+        {
+            if(defecto.checked == true) 
+            {
+                if(observacion.value == '')
+                {
+                    observacion.focus();
+                }
+                else
+                {
+                    agregarDefecto();
+                }                
+            } 
+            else
+            {
+                defecto.focus();
+            }
+        }               
     }
     else if((key >= 48 && key <= 57) || (key >= 96 && key <= 105))
     {
@@ -311,20 +293,45 @@ cantidad.addEventListener('input', function()
         //...
     }       
 }); 
-//DEFECTO
-defecto.addEventListener('change', function()
-{
-    if (defecto.checked)
+//ITEM CON DEFECTO
+defecto.addEventListener('keydown', function(e)
+{  
+    var code = e.keyCode;
+    
+    if (code == 13)
     {
-        tipoDefecto.disabled = false;
-    } 
+        if(defecto.checked == true) 
+        { 
+            observacion.focus(); 
+        }
+        else 
+        {
+            agregarItem();
+        }       
+    }
     else
     {
-        tipoDefecto.disabled = true;
-        tipoDefecto.value = '';
+        //...
     }
 });
-//AGREGAR ITEM
+//OBSERVACION
+observacion.addEventListener('keydown', function(e)
+{  
+    var code = e.keyCode;
+    
+    if (code == 13)
+    {
+        if(observacion.value != '')
+        {
+            agregarDefecto()
+        }
+        else
+        {
+            //...
+        }      
+    }
+});
+//AGREGAR ITEM NORMAL
 function agregarItem()
 {
     if(codigo.value !='' && codigo.value.length == 5 && nombre.value !='' && cantidad.value !='')
@@ -356,24 +363,38 @@ function agregarItem()
             }
             else
             {
-                agregarFila();
+                agregarFilaItem();
             }
         }
         else
         {
-            agregarFila();
+            agregarFilaItem();
         }
     }
     else 
     {
-        if(codigo.value == '') { codigo.focus() }  
-        if(nombre.value == '') { nombre.focus() } 
-        else if(cantidad.value == '') { cantidad.focus() }                         
-        else {} 
+        if(codigo.value == '') 
+        { 
+            codigo.focus() 
+        }  
+        if(nombre.value == '') 
+        { 
+            nombre.focus() 
+        } 
+        else if(cantidad.value == '') 
+        { 
+            cantidad.focus() 
+        }                         
+        else 
+        {
+            //...
+        } 
     }
 }
-function agregarFila()
+function agregarFilaItem()
 {
+    tabla.style.display = 'block';
+
     var row = tbody.insertRow(0);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
@@ -395,12 +416,149 @@ function agregarFila()
     sumarItems();
     limpiarDatos();
 }
+//AGREGAR ITEM NORMAL O ITEM CON DEFECTO
+function agregarDefecto()
+{
+    if(codigo.value !='' && codigo.value.length == 5 && nombre.value !='' && cantidad.value !='' && observacion.value != '')
+    {
+        agregarFilaDefecto();
+    }
+    else 
+    {
+        if(codigo.value == '') 
+        { 
+            codigo.focus() 
+        }  
+        if(nombre.value == '') 
+        { 
+            nombre.focus() 
+        } 
+        else if(cantidad.value == '') 
+        { 
+            cantidad.focus() 
+        }   
+        else if(observacion.value == '') 
+        { 
+            observacion.focus() 
+        }                       
+        else 
+        {
+            //...
+        } 
+    }
+}
+function agregarFilaDefecto()
+{
+    tablaDefectos.style.display = 'block';
+
+    var row = tbodyDefectos.insertRow(0);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+    cell1.innerHTML = codigo.value;
+
+    if(nombre.disabled)
+    {
+        cell2.innerHTML = nombre.value+' (DEFECTO: '+observacion.value+')';
+    }
+    else
+    {
+        cell2.innerHTML = nombre.value+' (DEFECTO: '+observacion.value+') (*)';
+    }
+    
+    cell3.innerHTML = '<div class="cantidad">'+cantidad.value+'</div>';
+    cell4.innerHTML = '<button class="eliminar" onclick="eliminarFila(this)"><i class="far fa-trash-alt"></i></button>';
+    sumarItems();
+    limpiarDatos();
+}
+// *****
+function limpiarDatos()
+{
+    codigo.value = '';
+    nombre.value = '';
+    nombre.disabled = true;
+    cantidad.value = '';
+    cantidad.disabled = true;
+    defecto.checked = false;
+    observacion.value = '';
+    observacion.disabled = true;
+    boxObservacion.style.display = 'none';
+    codigo.focus();
+}
+// CLIC BOTON
+botonBuscar.addEventListener('click', function() 
+{
+    if(codigo.disabled == false)
+    {
+        tbodyConsulta.innerHTML = '';        
+        consulta.value = ''; 
+        modal.style.display = 'flex';
+        consulta.focus(); 
+    }
+    else
+    {
+        modal.style.display = 'none'; 
+    }
+});
+botonLimpiar.addEventListener('click', function()
+{ 
+    var filas = tbody.rows.length;
+    var filasDefectos = tbodyDefectos.rows.length; 
+    
+    if(filas > 0 || filasDefectos > 0)
+    {
+        var confirmar = confirm('¿QUIERE BORRAR INFORMACION DE LA TABLA?');
+
+        if(confirmar == true)
+        {
+            tbody.innerHTML = '';
+            tabla.style.display = 'none';
+            tbodyDefectos.innerHTML = '';
+            tablaDefectos.style.display = 'none';
+        }
+        else
+        {
+            //...
+        }
+    }
+    else
+    {
+        //...
+    }
+});
+botonCrear.addEventListener('click', function() 
+{ 
+    crearPDF(); 
+});
+botonAgregar.addEventListener('click', function() 
+{
+    if(defecto.checked == true) 
+    {
+        agregarDefecto();
+    } 
+    else
+    {
+        agregarItem();
+    }     
+});
+botonConsulta.addEventListener('click', function() 
+{ 
+    consultarItem();  
+});
+botonCerrar.addEventListener('click', function() 
+{ 
+    modal.style.display = 'none';
+    tbodyConsulta.innerHTML = '';        
+    consulta.value = ''; 
+});
 //CREAR PDF
 function crearPDF()
 {
     var filas = tbody.rows.length; 
+    var filasDefectos = tbodyDefectos.rows.length;
 
-    if(filas > 0)
+    if(filas > 0 || filasDefectos > 0)
     {
         if(tipoInforme.value != 0 && semana.value != 0 && distribuidor.value != 0 && distribuidor.value != 13)
         {
@@ -417,26 +575,61 @@ function crearPDF()
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 3 },
                 jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };          
-            sortTable('tabla');
-            //sortTable('tablaDefectos');
-            ocultarColumna(3, 'none', 'block');
+            };
+            
+            if(filas > 0 )
+            {
+                sortTable('tabla');
+                ocultarColumna(3, 'none', 'block', 'tabla');
+            }
+            if(filasDefectos > 0 )
+            {
+                sortTable('tablaDefectos');
+                ocultarColumna(3, 'none', 'block', 'tablaDefectos');
+            }
+            
             html2pdf().set(opt).from(element).save().then(function()
             {
-                ocultarColumna(3, 'block', 'none');
+                if(filas > 0 )
+                {
+                    ocultarColumna(3, 'block', 'none', 'tabla');
+                }
+                if(filasDefectos > 0 )
+                {
+                    ocultarColumna(3, 'block', 'none', 'tablaDefectos');
+                }
             });
         }
         else
         {
-            habilitarCodigo();
-
-            if(tipoInforme.value == 0) { tipoInforme.focus() }
-            else if(semana.value == 0) { semana.focus() }
-            else if(distribuidor.value == 0 || distribuidor.value == 13) { distribuidor.focus() }
-            else if(codigo.value == '') { codigo.focus() }
-            else if(nombre.value == '') { nombre.focus() }
-            else if(cantidad.value == '') { cantidad.focus() }
-            else {}
+            if(tipoInforme.value == 0) 
+            { 
+                tipoInforme.focus(); 
+            }
+            else if(semana.value == 0) 
+            { 
+                semana.focus(); 
+            }
+            else if(distribuidor.value == 0 || distribuidor.value == 13) 
+            { 
+                distribuidor.focus(); 
+            }
+            else if(codigo.value == '') 
+            { 
+                codigo.focus(); 
+            }
+            else if(nombre.value == '') 
+            { 
+                nombre.focus(); 
+            }
+            else if(cantidad.value == '') 
+            { 
+                cantidad.focus(); 
+            }
+            else 
+            {
+                //...
+            }
         }
     }
     else
@@ -444,64 +637,7 @@ function crearPDF()
         //...
     }  
 }
-// ****
-function limpiarDatos()
-{
-    codigo.value = '';
-    nombre.value = '';
-    nombre.disabled = true;
-    cantidad.value = '';
-    cantidad.disabled = true;
-    codigo.focus();
-}
-function sumarItems()
-{
-    var suma = 0;
-    var cantidades = document.querySelectorAll('.cantidad');
-    cantidades.forEach(function(num)
-    {
-        suma = parseInt(num.innerHTML) + suma;            
-    });
-    total.innerHTML = 'Total Items: '+suma;
-} 
-function buscarItem()
-{
-    var filtro = items.filter(items => items.id == codigo.value);
-
-    if(filtro.length > 0)
-    {
-        nombre.value = filtro[0].nombre.toUpperCase();
-        cantidad.disabled = false;                    
-        cantidad.focus();
-    }
-    else
-    {
-        nombre.disabled = false;
-        nombre.focus();                    
-    }
-}
-function eliminarFila(e)
-{       
-    var td = e.parentNode; 
-    var tr = td.parentNode;
-    tr.parentNode.removeChild(tr); 
-    sumarItems();
-}
-function ocultarColumna(col, displayCol, displayTitulo)
-{
-    for(var i = 0; i < tabla.rows.length; i++)
-    {
-        for(var j = 0; j < tabla.rows[i].cells.length; j++)
-        {            
-            if(j == col)
-            {
-                tabla.rows[i].cells[j].style.display = displayCol;
-            }
-        }
-    }
-    tituloInforme.style.display = displayTitulo;
-    tituloDistribuidor.style.display = displayTitulo;
-}
+//ORDENAR ITEM TABLA POR ABCEDARIO
 function sortTable(idtabla)
 {
     var table, rows, switching, i, x, y, shouldSwitch;
@@ -542,52 +678,49 @@ function sortTable(idtabla)
       }
     }
 }
-// MODAL
-consulta.addEventListener('keydown', function(e)
-{  
-    var code = e.keyCode;
-    
-    if (code == 13)
-    {
-        consultarItem();      
-    }
-});
-function limpiarModal()
+// OCULTAR COLUMNA
+function ocultarColumna(col, displayCol, displayTitulo, nombreTabla)
 {
+    var tabla = document.getElementById(nombreTabla);
 
+    for(var i = 0; i < tabla.rows.length; i++)
+    {
+        for(var j = 0; j < tabla.rows[i].cells.length; j++)
+        {            
+            if(j == col)
+            {
+                tabla.rows[i].cells[j].style.display = displayCol;
+            }
+        }
+    }
+    tituloInforme.style.display = displayTitulo;
+    tituloDistribuidor.style.display = displayTitulo;
 }
-function itemSeleccionado(e)
+// ****
+function sumarItems()
 {
+    var suma = 0;
+    var cantidades = document.querySelectorAll('.cantidad');
+    cantidades.forEach(function(num)
+    {
+        suma = parseInt(num.innerHTML) + suma;            
+    });
+    total.innerHTML = 'Total Items: '+suma;
+} 
+function eliminarFila(e)
+{       
     var td = e.parentNode; 
     var tr = td.parentNode;
-    
-    codigo.value = tr.cells[0].innerHTML;
-    buscarItem();
-    modal.style.display = 'none'; 
-}
-function consultarItem()
-{
-    var query = consulta.value.toUpperCase();
-    if(query.length > 2) 
+    tr.parentNode.removeChild(tr); 
+    sumarItems();
+
+    if(tbody.rows.length < 1)
     {
-        tbodyConsulta.innerHTML = '';
-        var query = consulta.value.toUpperCase();
-    
-        var busqueda = items.filter(function(e)
-        {
-            return e.nombre.indexOf(query) > -1;
-        });
-    
-        busqueda.forEach(function(e)
-        {
-            var row = tbodyConsulta.insertRow(0);
-            var cell1 = row.insertCell(0);
-            var cell2 = row.insertCell(1);
-            var cell3 = row.insertCell(2);
-            cell1.innerHTML = e.id;
-            cell2.innerHTML = e.nombre;  
-            cell3.innerHTML = '<td><button class="agregar" onclick="itemSeleccionado(this)"><i class="fas fa-plus"></i></button></td>';
-        });
-        sortTable('tablaConsulta');
+        tabla.style.display = 'none';
+    }
+
+    if(tbodyDefectos.rows.length < 1)
+    {
+        tablaDefectos.style.display = 'none';
     }
 }
