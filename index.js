@@ -412,6 +412,7 @@ function agregarFilaItem()
     
     cell3.innerHTML = '<div class="cantidad">'+cantidad.value+'</div>';
     cell4.innerHTML = '<button class="eliminar" onclick="eliminarFila(this)"><i class="far fa-trash-alt"></i></button>';
+    cell4.classList.add('col-4');
     sumarItems();
     limpiarDatos();
 }
@@ -468,6 +469,7 @@ function agregarFilaDefecto()
     
     cell3.innerHTML = '<div class="cantidad">'+cantidad.value+'</div>';
     cell4.innerHTML = '<button class="eliminar" onclick="eliminarFila(this)"><i class="far fa-trash-alt"></i></button>';
+    cell4.classList.add('col-4');
     sumarItems();
     limpiarDatos();
 }
@@ -680,19 +682,15 @@ function sortTable(idtabla)
 // OCULTAR COLUMNA
 function ocultarColumna(col, displayCol, displayTitulo, nombreTabla)
 {
-    var tabla = document.getElementById(nombreTabla);
-
-    for(var i = 0; i < tabla.rows.length; i++)
+    var all = document.getElementsByClassName('col-4');
+    
+    for (var i = 0; i < all.length; i++) 
     {
-        for(var j = 0; j < tabla.rows[i].cells.length; j++)
-        {            
-            if(j == col)
-            {
-                tabla.rows[i].cells[j].style.display = displayCol;
-            }
-        }
+        all[i].style.display = displayCol;
     }
+
     tituloInforme.style.display = displayTitulo;
+    tituloSemana.style.display = displayTitulo;
     tituloDistribuidor.style.display = displayTitulo;
 }
 // ****

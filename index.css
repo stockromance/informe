@@ -179,7 +179,7 @@ html, body
 }
 #tablas
 {
-    width: 100vw;
+    width: 100%;
     max-width: 600px;
 }
 #tabla, #tablaDefectos 
@@ -226,7 +226,7 @@ html, body
 }
 .tablaPdf th:nth-child(2), td:nth-child(2) 
 {
-    min-width: 128px;
+    width: 418px;
 }
 .tablaPdf td:nth-child(2) 
 {
