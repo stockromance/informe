@@ -178,7 +178,8 @@ function buscarItem()
 
     if(filtro.length > 0)
     {
-        nombre.value = filtro[0].nombre.toUpperCase();
+        nombre.value = filtro[0].nombre.toUpperCase();        
+        nombre.disabled = true;
         cantidad.disabled = false;                    
         cantidad.focus();
     }
@@ -509,7 +510,7 @@ botonLimpiar.addEventListener('click', function()
     
     if(filas > 0 || filasDefectos > 0)
     {
-        var confirmar = confirm('¿QUIERE BORRAR INFORMACION DE LA TABLA?');
+        var confirmar = confirm('¿BORRAR TODOS LOS DATOS?');
 
         if(confirmar == true)
         {
@@ -517,6 +518,7 @@ botonLimpiar.addEventListener('click', function()
             tabla.style.display = 'none';
             tbodyDefectos.innerHTML = '';
             tablaDefectos.style.display = 'none';
+            sumarItems();
         }
         else
         {
@@ -738,9 +740,9 @@ function limpiarModal()
 function itemSeleccionado(e)
 {
     var td = e.parentNode; 
-    var tr = td.parentNode;
-    
-    codigo.value = tr.cells[0].innerHTML;
+    var tr = td.parentNode;    
+    codigo.value = tr.cells[0].innerHTML;    
+
     buscarItem();
     modal.style.display = 'none'; 
 }
