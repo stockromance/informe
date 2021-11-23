@@ -141,26 +141,6 @@ html, body
     background-color: #531dab;
     color: #ffffff;   
 }
-/* ITEM CON DEFECTO */
-#boxDefecto 
-{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 10px;
-    width: 360px;
-    padding-left: 120px;
-}
-#boxDefecto input 
-{
-    width: 15px;
-    height: 15px;
-}
-#boxDefecto div 
-{
-    margin-left: 5px;
-    font-size: 12px;
-}
 /* PDF */
 #tituloInforme 
 {
@@ -182,7 +162,7 @@ html, body
     width: 100%;
     max-width: 600px;
 }
-#tabla, #tablaDefectos 
+#tabla
 {
     width: 100%;
     border-collapse: collapse;
@@ -206,46 +186,46 @@ html, body
     font-size: 14px;
 }
 /* TABLAS PERSONALIZACION */
-.tablaPdf thead th 
+#tabla thead th 
 {
     text-align: center;
 }
-.tablaPdf th, td 
+#tabla th, td 
 {
     border: 0.1px solid #000000;
     padding: 5px;
     text-transform: uppercase;
 }
-.tablaPdf th:nth-child(1), td:nth-child(1) 
+#tabla th:nth-child(1), td:nth-child(1) 
 {
     width: 60px;
 }
-.tablaPdf td:nth-child(1) 
+#tabla td:nth-child(1) 
 {
     text-align: center;
 }
-.tablaPdf th:nth-child(2), td:nth-child(2) 
+#tabla th:nth-child(2), td:nth-child(2) 
 {
     width: 418px;
 }
-.tablaPdf td:nth-child(2) 
+#tabla td:nth-child(2) 
 {
     text-align: left;
 }
-.tablaPdf th:nth-child(3), td:nth-child(3) 
+#tabla th:nth-child(3), td:nth-child(3) 
 {
     width: 80px;
 }
-.tablaPdf td:nth-child(3) 
+#tabla td:nth-child(3) 
 {
     padding-right: 10px;
     text-align: right;
 }
-.tablaPdf th:nth-child(4), td:nth-child(4) 
+#tabla th:nth-child(4), td:nth-child(4) 
 {
     width: 40px;
 }
-.tablaPdf td:nth-child(4) 
+#tabla td:nth-child(4) 
 {
     text-align: center;
 }
@@ -364,13 +344,6 @@ html, body
 }
 #tituloDistribuidor 
 {
-    display: none;
-}
-#tabla 
-{
-    display: none;
-}
-#tablaDefectos {
     display: none;
 }
 #modal

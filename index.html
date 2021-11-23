@@ -18,6 +18,7 @@
                         <option value="0"></option>
                         <option value="1">Inventario</option>
                         <option value="2">Devolucion</option>
+                        <option value="3">Productos con Defectos</option>
                     </select>
                 </div>
                 <div class="box">
@@ -70,9 +71,6 @@
                 <div class="box">
                     <label for="cantidad">Item Cantidad</label>
                     <input type="number" name="cantidad" id="cantidad" disabled>
-                </div>
-                <div class="box" id="boxDefecto">                    
-                    <input type="checkbox" name="defecto" id="defecto" disabled><div>Item con defecto</div> 
                 </div>  
                 <div class="box" id="boxObservacion">
                     <label for="observacion">Observacion</label>
@@ -89,7 +87,7 @@
                 <div id="tituloSemana">Semana N°</div>
                 <div id="tituloDistribuidor">Distribuidor:</div>
                 <div id="tablas">
-                    <table class="tablaPdf" id="tabla">
+                    <table id="tabla">
                         <thead>
                             <tr>
                                 <th>Codigo</th>
@@ -99,17 +97,6 @@
                             </tr>
                         </thead>
                         <tbody id="tbody"></tbody>
-                    </table>
-                    <table class="tablaPdf" id="tablaDefectos">
-                        <thead>
-                            <tr>
-                                <th>Codigo</th>
-                                <th>Item con Defecto</th>
-                                <th>Cantidad</th>
-                                <th class="col-4">-</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tbodyDefectos"></tbody>
                     </table>
                 </div>                
                 <div id="total">Total Items: 0</div>

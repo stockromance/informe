@@ -1,3 +1,5 @@
+//ULTIMO SELECT INFORME
+var ultimo = 0;
 // INFO
 const tipoInforme = document.getElementById('tipoInforme');
 const semana = document.getElementById('semana');
@@ -8,7 +10,6 @@ const botonBuscar = document.getElementById('botonBuscar');
 const nombre = document.getElementById('nombre');
 const cantidad = document.getElementById('cantidad');
 const boxObservacion = document.getElementById('boxObservacion');
-const defecto = document.getElementById('defecto');
 const observacion = document.getElementById('observacion');
 const botonLimpiar = document.getElementById('botonLimpiar');
 const botonCrear = document.getElementById('botonCrear');
@@ -20,8 +21,6 @@ const tituloSemana = document.getElementById('tituloSemana');
 const tituloDistribuidor = document.getElementById('tituloDistribuidor');
 const tabla = document.getElementById('tabla');
 const tbody = document.getElementById('tbody');
-const tablaDefectos = document.getElementById('tablaDefectos');
-const tbodyDefectos = document.getElementById('tbodyDefectos');
 const total = document.getElementById('total');
 // MODAL
 const modal = document.getElementById('modal');
@@ -34,52 +33,95 @@ tipoInforme.addEventListener('change', function()
 { 
     var textoTipoInforme = tipoInforme.options[tipoInforme.selectedIndex].text;
     tituloInforme.innerHTML = 'Informe de '+textoTipoInforme;
+    
+    if(tipoInforme.value == 3)
+    {
+        boxObservacion.style.display = 'flex';
+        tbody.innerHTML = '';
+        ultimo = tipoInforme.value;
+    }
+    else 
+    {
+        boxObservacion.style.display = 'none';
+        observacion.value = '';
+
+        if(ultimo == 3)
+        {
+            tbody.innerHTML = '';
+            ultimo = 0;
+        }
+    }
+
     habilitar(); 
+
+    if(tipoInforme.value == 0)
+    {
+        tipoInforme.focus();
+    }
+    else if(semana.value == 0)
+    {
+        semana.focus();
+    }
+    else if(distribuidor.value == 0 || distribuidor.value == 13)
+    {
+        distribuidor.focus();
+    }
+    else
+    {
+        codigo.focus();
+    }
 });
 semana.addEventListener('change', function() 
 {
     var textoSemana = semana.options[semana.selectedIndex].text;
     tituloSemana.innerHTML = 'Semana N° '+textoSemana;
     habilitar(); 
+
+    if(tipoInforme.value == 0)
+    {
+        tipoInforme.focus();
+    }
+    else if(semana.value == 0)
+    {
+        semana.focus();
+    }
+    else if(distribuidor.value == 0 || distribuidor.value == 13)
+    {
+        distribuidor.focus();
+    }
+    else
+    {
+        codigo.focus();
+    }
 });
 distribuidor.addEventListener('change', function() 
 {
     var textoDistribuidor = distribuidor.options[distribuidor.selectedIndex].text;
     tituloDistribuidor.innerHTML = 'Distribuidor: '+textoDistribuidor; 
-    habilitar() 
-});
-//CHECK
-defecto.addEventListener('change', function()
-{
-    if (defecto.checked == true)
-    {        
-        boxObservacion.style.display = 'flex'
-        observacion.disabled = false;
-        observacion.focus();        
-    } 
+    habilitar();
+    
+    if(tipoInforme.value == 0)
+    {
+        tipoInforme.focus();
+    }
+    else if(semana.value == 0)
+    {
+        semana.focus();
+    }
+    else if(distribuidor.value == 0 || distribuidor.value == 13)
+    {
+        distribuidor.focus();
+    }
     else
     {
-        boxObservacion.style.display = 'none'
-        observacion.disabled = true;
-        observacion.value = '';
-        
+        codigo.focus();
     }
 });
 function habilitar()
 {
-    if (tipoInforme.value != 0 && semana.value != 0 && distribuidor.value != 0 && distribuidor.value != 13)
+    if(tipoInforme.value != 0 && semana.value != 0 && distribuidor.value != 0 && distribuidor.value != 13)
     {
         codigo.disabled = false;
-        defecto.disabled = false;
-        
-        if (tipoInforme.value == 2)
-        {
-            defecto.disabled = false;
-        }
-        else 
-        {
-            defecto.disabled = true;
-        }
     }
     else 
     {
@@ -100,6 +142,7 @@ codigo.addEventListener('keydown', function(e)
     {
         if(codigo.value.length == 5)
         {
+            // si nombre.disabled == false??? 
             if(nombre.value == '') 
             {
                 nombre.focus();
@@ -188,7 +231,7 @@ function buscarItem()
         nombre.disabled = false;
         nombre.focus();                    
     }
-} 
+}
 //NOMBRE ITEM
 nombre.addEventListener('keydown', function(e)
 {  
@@ -196,7 +239,7 @@ nombre.addEventListener('keydown', function(e)
     
     if (code == 13)
     {
-        if(cantidad.value == '') 
+        if(nombre.value != '' && cantidad.value == '') 
         { 
             cantidad.focus(); 
         }
@@ -230,27 +273,17 @@ cantidad.addEventListener('keydown', function(e)
 
     if (key == 13)
     {
-        if(defecto.disabled == true)
+        if(tipoInforme.value == 3)
+        {
+            observacion.focus();
+        }
+        else if(tipoInforme.value == 1 || tipoInforme.value == 2)
         {
             agregarItem();
         }
         else
         {
-            if(defecto.checked == true) 
-            {
-                if(observacion.value == '')
-                {
-                    observacion.focus();
-                }
-                else
-                {
-                    agregarDefecto();
-                }                
-            } 
-            else
-            {
-                defecto.focus();
-            }
+            //...
         }               
     }
     else if((key >= 48 && key <= 57) || (key >= 96 && key <= 105))
@@ -271,7 +304,7 @@ cantidad.addEventListener('input', function()
     var num = ['0','1','2','3','4','5','6','7','8','9'];
     var str = cantidad.value.toString();
     var nuevoStr = '';
-
+    //si el primer numero es 0???
     if(str.length >= 3) 
     {
         for(var i = 0; i < str.length; i++) 
@@ -291,29 +324,17 @@ cantidad.addEventListener('input', function()
     else 
     {
         //...
-    }       
-}); 
-//ITEM CON DEFECTO
-defecto.addEventListener('keydown', function(e)
-{  
-    var code = e.keyCode;
+    }  
     
-    if (code == 13)
+    if(cantidad.value.length > 0)
     {
-        if(defecto.checked == true) 
-        { 
-            observacion.focus(); 
-        }
-        else 
-        {
-            agregarItem();
-        }       
+        observacion.disabled = false;
     }
     else
     {
-        //...
+        observacion.disabled = true;
     }
-});
+}); 
 //OBSERVACION
 observacion.addEventListener('keydown', function(e)
 {  
@@ -331,6 +352,29 @@ observacion.addEventListener('keydown', function(e)
         }      
     }
 });
+//LIMPIAR
+function limpiarDatos()
+{
+    codigo.value = '';
+    nombre.value = '';
+    nombre.disabled = true;
+    cantidad.value = '';
+    cantidad.disabled = true;
+    observacion.value = '';
+    observacion.disabled = true;
+    codigo.focus();
+}
+//SUMAR ITEMS
+function sumarItems()
+{
+    var suma = 0;
+    var cantidades = document.querySelectorAll('.cantidad');
+    cantidades.forEach(function(num)
+    {
+        suma = parseInt(num.innerHTML) + suma;            
+    });
+    total.innerHTML = 'Total Items: '+suma;
+}
 //AGREGAR ITEM NORMAL
 function agregarItem()
 {
@@ -393,8 +437,6 @@ function agregarItem()
 }
 function agregarFilaItem()
 {
-    tabla.style.display = 'block';
-
     var row = tbody.insertRow(0);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
@@ -417,7 +459,7 @@ function agregarFilaItem()
     sumarItems();
     limpiarDatos();
 }
-//AGREGAR ITEM NORMAL O ITEM CON DEFECTO
+//AGREGAR ITEM CON DEFECTO
 function agregarDefecto()
 {
     if(codigo.value !='' && codigo.value.length == 5 && nombre.value !='' && cantidad.value !='' && observacion.value != '')
@@ -450,9 +492,7 @@ function agregarDefecto()
 }
 function agregarFilaDefecto()
 {
-    tablaDefectos.style.display = 'block';
-
-    var row = tbodyDefectos.insertRow(0);
+    var row = tbody.insertRow(0);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
@@ -474,19 +514,13 @@ function agregarFilaDefecto()
     sumarItems();
     limpiarDatos();
 }
-// *****
-function limpiarDatos()
-{
-    codigo.value = '';
-    nombre.value = '';
-    nombre.disabled = true;
-    cantidad.value = '';
-    cantidad.disabled = true;
-    defecto.checked = false;
-    observacion.value = '';
-    observacion.disabled = true;
-    boxObservacion.style.display = 'none';
-    codigo.focus();
+//ELIMINAR FILA
+function eliminarFila(e)
+{       
+    var td = e.parentNode; 
+    var tr = td.parentNode;
+    tr.parentNode.removeChild(tr); 
+    sumarItems();
 }
 // CLIC BOTON
 botonBuscar.addEventListener('click', function() 
@@ -506,18 +540,14 @@ botonBuscar.addEventListener('click', function()
 botonLimpiar.addEventListener('click', function()
 { 
     var filas = tbody.rows.length;
-    var filasDefectos = tbodyDefectos.rows.length; 
     
-    if(filas > 0 || filasDefectos > 0)
+    if(filas > 0)
     {
         var confirmar = confirm('¿BORRAR TODOS LOS DATOS?');
 
         if(confirmar == true)
         {
             tbody.innerHTML = '';
-            tabla.style.display = 'none';
-            tbodyDefectos.innerHTML = '';
-            tablaDefectos.style.display = 'none';
             sumarItems();
         }
         else
@@ -536,7 +566,7 @@ botonCrear.addEventListener('click', function()
 });
 botonAgregar.addEventListener('click', function() 
 {
-    if(defecto.checked == true) 
+    if(tipoInforme.value == 3) 
     {
         agregarDefecto();
     } 
@@ -559,9 +589,8 @@ botonCerrar.addEventListener('click', function()
 function crearPDF()
 {
     var filas = tbody.rows.length; 
-    var filasDefectos = tbodyDefectos.rows.length;
 
-    if(filas > 0 || filasDefectos > 0)
+    if(filas > 0)
     {
         if(tipoInforme.value != 0 && semana.value != 0 && distribuidor.value != 0 && distribuidor.value != 13)
         {
@@ -580,27 +609,13 @@ function crearPDF()
                 jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
             
-            if(filas > 0 )
-            {
-                sortTable('tabla');
-                ocultarColumna(3, 'none', 'block', 'tabla');
-            }
-            if(filasDefectos > 0 )
-            {
-                sortTable('tablaDefectos');
-                ocultarColumna(3, 'none', 'block', 'tablaDefectos');
-            }
+            sortTable('tabla');
+            ocultarColumna(3, 'none', 'block', 'tabla');
             
             html2pdf().set(opt).from(element).save().then(function()
             {
-                if(filas > 0 )
-                {
-                    ocultarColumna(3, 'block', 'none', 'tabla');
-                }
-                if(filasDefectos > 0 )
-                {
-                    ocultarColumna(3, 'block', 'none', 'tablaDefectos');
-                }
+                ocultarColumna(3, 'block', 'none', 'tabla');
+                codigo.focus();
             });
         }
         else
@@ -620,14 +635,6 @@ function crearPDF()
             else if(codigo.value == '') 
             { 
                 codigo.focus(); 
-            }
-            else if(nombre.value == '') 
-            { 
-                nombre.focus(); 
-            }
-            else if(cantidad.value == '') 
-            { 
-                cantidad.focus(); 
             }
             else 
             {
@@ -695,34 +702,6 @@ function ocultarColumna(col, displayCol, displayTitulo, nombreTabla)
     tituloSemana.style.display = displayTitulo;
     tituloDistribuidor.style.display = displayTitulo;
 }
-// ****
-function sumarItems()
-{
-    var suma = 0;
-    var cantidades = document.querySelectorAll('.cantidad');
-    cantidades.forEach(function(num)
-    {
-        suma = parseInt(num.innerHTML) + suma;            
-    });
-    total.innerHTML = 'Total Items: '+suma;
-} 
-function eliminarFila(e)
-{       
-    var td = e.parentNode; 
-    var tr = td.parentNode;
-    tr.parentNode.removeChild(tr); 
-    sumarItems();
-
-    if(tbody.rows.length < 1)
-    {
-        tabla.style.display = 'none';
-    }
-
-    if(tbodyDefectos.rows.length < 1)
-    {
-        tablaDefectos.style.display = 'none';
-    }
-}
 // MODAL
 consulta.addEventListener('keydown', function(e)
 {  
@@ -733,10 +712,6 @@ consulta.addEventListener('keydown', function(e)
         consultarItem();      
     }
 });
-function limpiarModal()
-{
-
-}
 function itemSeleccionado(e)
 {
     var td = e.parentNode; 
