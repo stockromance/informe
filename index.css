@@ -19,12 +19,14 @@ html, body
 }
 #contenedor 
 {
+    
     display: grid;
     grid-template-areas:    '.   info    .'
                             '.   item    .'
                             '.   pdf     .';
     grid-template-rows: auto auto auto;
-    grid-template-columns: auto max-content auto;
+    grid-template-columns: auto minmax(auto, 600px) auto;
+    
 }
 #info 
 {
@@ -160,7 +162,6 @@ html, body
 #tablas
 {
     width: 100%;
-    max-width: 600px;
 }
 #tabla
 {
@@ -206,7 +207,7 @@ html, body
 }
 #tabla th:nth-child(2), td:nth-child(2) 
 {
-    width: 418px;
+    width: 100%;
 }
 #tabla td:nth-child(2) 
 {
