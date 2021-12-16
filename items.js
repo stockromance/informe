@@ -840,7 +840,7 @@ const items = [
 	{id:'15053', nombre:'CAMISOLA VIVIAN'},
 	{id:'75036', nombre:'CAPA EM CYBERSKIN 12'},
 	{id:'75034', nombre:'CAPA EM CYBERSKIN 13 X 4CM'},
-	{id:'75030', nombre:'CAPA EM CYBERSKIN 14X4
+	{id:'75030', nombre:'CAPA EM CYBERSKIN 14X4'},
 	{id:'67827', nombre:'CAPA INFANTIL ALICE'},
 	{id:'67761', nombre:'CAPA INFANTIL LICA'},
 	{id:'66741', nombre:'CAPRI BELLA FIT'},
