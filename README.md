@@ -1,1 +1,1 @@
-# informe
+# Informes para stock
