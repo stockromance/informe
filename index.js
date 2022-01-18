@@ -548,6 +548,7 @@ botonLimpiar.addEventListener('click', function()
         if(confirmar == true)
         {
             tbody.innerHTML = '';
+            tipoInforme.value = 0; 
             sumarItems();
         }
         else
