@@ -603,7 +603,7 @@ function crearPDF()
         
             var opt = 
             {
-                margin:       0.5,
+                margin:       [0.5, 1, 0.5, 1],
                 filename:     nombrePDF+'_'+fecha+'_'+hora+'.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 3 },
