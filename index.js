@@ -31,9 +31,6 @@ const botonCerrar = document.getElementById('botonCerrar');
 //SELECT
 tipoInforme.addEventListener('change', function() 
 { 
-    var textoTipoInforme = tipoInforme.options[tipoInforme.selectedIndex].text;
-    tituloInforme.innerHTML = 'Informe de '+textoTipoInforme;
-    
     if(tipoInforme.value == 3)
     {
         boxObservacion.style.display = 'flex';
@@ -62,7 +59,7 @@ tipoInforme.addEventListener('change', function()
     {
         semana.focus();
     }
-    else if(distribuidor.value == 0 || distribuidor.value == 13)
+    else if(distribuidor.value == 0 || distribuidor.value == 99)
     {
         distribuidor.focus();
     }
@@ -73,8 +70,6 @@ tipoInforme.addEventListener('change', function()
 });
 semana.addEventListener('change', function() 
 {
-    var textoSemana = semana.options[semana.selectedIndex].text;
-    tituloSemana.innerHTML = 'Semana N° '+textoSemana;
     habilitar(); 
 
     if(tipoInforme.value == 0)
@@ -85,7 +80,7 @@ semana.addEventListener('change', function()
     {
         semana.focus();
     }
-    else if(distribuidor.value == 0 || distribuidor.value == 13)
+    else if(distribuidor.value == 0 || distribuidor.value == 99)
     {
         distribuidor.focus();
     }
@@ -96,8 +91,6 @@ semana.addEventListener('change', function()
 });
 distribuidor.addEventListener('change', function() 
 {
-    var textoDistribuidor = distribuidor.options[distribuidor.selectedIndex].text;
-    tituloDistribuidor.innerHTML = 'Distribuidor: '+textoDistribuidor; 
     habilitar();
     
     if(tipoInforme.value == 0)
@@ -108,7 +101,7 @@ distribuidor.addEventListener('change', function()
     {
         semana.focus();
     }
-    else if(distribuidor.value == 0 || distribuidor.value == 13)
+    else if(distribuidor.value == 0 || distribuidor.value == 99)
     {
         distribuidor.focus();
     }
@@ -119,7 +112,7 @@ distribuidor.addEventListener('change', function()
 });
 function habilitar()
 {
-    if(tipoInforme.value != 0 && semana.value != 0 && distribuidor.value != 0 && distribuidor.value != 13)
+    if(tipoInforme.value != 0 && semana.value != 0 && distribuidor.value != 0 && distribuidor.value != 99)
     {
         codigo.disabled = false;
     }
@@ -142,7 +135,6 @@ codigo.addEventListener('keydown', function(e)
     {
         if(codigo.value.length == 5)
         {
-            // si nombre.disabled == false??? 
             if(nombre.value == '') 
             {
                 nombre.focus();
@@ -586,68 +578,6 @@ botonCerrar.addEventListener('click', function()
     tbodyConsulta.innerHTML = '';        
     consulta.value = ''; 
 });
-//CREAR PDF
-function crearPDF()
-{
-    var filas = tbody.rows.length; 
-
-    if(filas > 0)
-    {
-        if(tipoInforme.value != 0 && semana.value != 0 && distribuidor.value != 0 && distribuidor.value != 13)
-        {
-            var element = pdf;
-            var nombrePDF = tipoInforme.options[tipoInforme.selectedIndex].text;;
-            var hoy = new Date();
-            var fecha = hoy.getDate()+'-'+(hoy.getMonth()+1)+'-'+hoy.getFullYear();
-            var hora = hoy.getHours()+'h'+hoy.getMinutes()+'m';
-        
-            var opt = 
-            {
-                margin:       [0.5, 1, 0.5, 1],
-                filename:     nombrePDF+'_'+fecha+'_'+hora+'.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 3 },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-            
-            sortTable('tabla');
-            ocultarColumna(3, 'none', 'block', 'tabla');
-            
-            html2pdf().set(opt).from(element).save().then(function()
-            {
-                ocultarColumna(3, 'block', 'none', 'tabla');
-                codigo.focus();
-            });
-        }
-        else
-        {
-            if(tipoInforme.value == 0) 
-            { 
-                tipoInforme.focus(); 
-            }
-            else if(semana.value == 0) 
-            { 
-                semana.focus(); 
-            }
-            else if(distribuidor.value == 0 || distribuidor.value == 13) 
-            { 
-                distribuidor.focus(); 
-            }
-            else if(codigo.value == '') 
-            { 
-                codigo.focus(); 
-            }
-            else 
-            {
-                //...
-            }
-        }
-    }
-    else
-    {
-        //...
-    }  
-}
 //ORDENAR ITEM TABLA POR ABCEDARIO
 function sortTable(idtabla)
 {
@@ -747,4 +677,75 @@ function consultarItem()
         });
         sortTable('tablaConsulta');
     }
+}
+//CREAR PDF
+function crearPDF()
+{
+    var filas = tbody.rows.length; 
+
+    if(filas > 0)
+    {
+        if(tipoInforme.value != 0 && semana.value != 0 && distribuidor.value != 0 && distribuidor.value != 99)
+        {
+            var textoTipoInforme = tipoInforme.options[tipoInforme.selectedIndex].text;
+            var textoSemana = semana.options[semana.selectedIndex].text;
+            var textoDistribuidor = distribuidor.options[distribuidor.selectedIndex].text;
+
+            tituloInforme.innerHTML = 'Informe de '+textoTipoInforme;            
+            tituloSemana.innerHTML = 'Semana N° '+textoSemana;            
+            tituloDistribuidor.innerHTML = 'Distribuidor: '+textoDistribuidor; 
+            
+            var element = pdf;
+            //var nombrePDF = tipoInforme.options[tipoInforme.selectedIndex].text;
+            var nombrePDF = textoTipoInforme.substring(0,3).toUpperCase()+'-'+textoSemana+'-'+textoDistribuidor.toUpperCase();
+            var hoy = new Date();
+            var fecha = hoy.getDate()+'-'+(hoy.getMonth()+1)+'-'+hoy.getFullYear();
+            var hora = hoy.getHours()+'h'+hoy.getMinutes()+'m';
+        
+            var opt = 
+            {
+                margin:       [0.5, 1, 0.5, 1],
+                filename:     nombrePDF+'.pdf',
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 3 },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+            
+            sortTable('tabla');
+            ocultarColumna(3, 'none', 'block', 'tabla');
+            
+            html2pdf().set(opt).from(element).save().then(function()
+            {
+                ocultarColumna(3, 'block', 'none', 'tabla');
+                codigo.focus();
+            });
+        }
+        else
+        {
+            if(tipoInforme.value == 0) 
+            { 
+                tipoInforme.focus(); 
+            }
+            else if(semana.value == 0) 
+            { 
+                semana.focus(); 
+            }
+            else if(distribuidor.value == 0 || distribuidor.value == 99) 
+            { 
+                distribuidor.focus(); 
+            }
+            else if(codigo.value == '') 
+            { 
+                codigo.focus(); 
+            }
+            else 
+            {
+                //...
+            }
+        }
+    }
+    else
+    {
+        //...
+    }  
 }
