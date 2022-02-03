@@ -7,7 +7,7 @@ input.addEventListener('change', function()
             {
                 var row = data.length-1;
 
-                list.innerHTML += "const items = [<br/>";
+                list.innerHTML += "const items = [";
 
                 for(var i = 0; i < row; i++)
                 {
