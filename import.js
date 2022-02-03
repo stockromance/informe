@@ -7,15 +7,15 @@ input.addEventListener('change', function()
             {
                 var row = data.length-1;
 
-                list.innerHTML += "const items = [";
+                list.innerHTML += "const items = [<br/>";
 
                 for(var i = 0; i < row; i++)
                 {
-                    list.innerHTML += "{id:'"+data[i][0]+"', nombre:'"+data[i][1]+"'},";             
+                    list.innerHTML += "<br/>{id:'"+data[i][0]+"', nombre:'"+data[i][1]+"'},";             
                 }                
                 
-                list.innerHTML += "{id:'"+data[row][0]+"', nombre:'"+data[row][1]+"'}";
-                list.innerHTML += "];";
+                list.innerHTML += "<br/>{id:'"+data[row][0]+"', nombre:'"+data[row][1]+"'}";
+                list.innerHTML += "<br/>];";
 
                 data.forEach(([key, value]) => {
                 console.log("{id:'"+key+"', nombre:'"+value+"'},");});
