@@ -9,9 +9,38 @@
     <body>
         <div class="container">
             <input type="file" id="input">
+            <input type="button" value="Crear JS" id="botonJS">
             <div id="list"></div>
+            <table id="tabla">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Item</th>
+                        <th>Cantidad</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody">
+                    <tr>
+                        <td>00002</td>
+                        <td>OLGA</td>
+                        <td>9</td>
+                    </tr>
+                    <tr>
+                        <td>00003</td>
+                        <td>JOSE</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>00001</td>
+                        <td>PABLO</td>
+                        <td>3</td>
+                    </tr>
+                </tbody>
+            </table>
+            <input type="button" value="Crear XLSX" id="botonXLSX">
         </div>
         <script src="https://unpkg.com/read-excel-file@4.x/bundle/read-excel-file.min.js"></script> 
+        <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
         <script src="import.js"></script>
     </body>
 </html>
