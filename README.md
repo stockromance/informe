@@ -1,1 +1,0 @@
-# Informes para stock
