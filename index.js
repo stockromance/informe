@@ -269,7 +269,7 @@ cantidad.addEventListener('keydown', function(e)
         {
             observacion.focus();
         }
-        else if(tipoInforme.value == 1 || tipoInforme.value == 2)
+        else if(tipoInforme.value == 1 || tipoInforme.value == 2 || tipoInforme.value == 4)
         {
             agregarItem();
         }
