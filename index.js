@@ -686,15 +686,42 @@ function ocultarColumna(displayCol, displayTitulo)
 }
 function semanaActual()
 {
-    currentdate = new Date();
-    var oneJan = new Date(currentdate.getFullYear(),0,1);
-    var numberOfDays = Math.floor((currentdate - oneJan) / (24 * 60 * 60 * 1000));
-    var result = Math.ceil(( currentdate.getDay() + 1 + numberOfDays) / 7);
-    semana.selectedIndex = result-1;
+    var fechaActual = new Date();
+    var primeroEnero = new Date(fechaActual.getFullYear(),0,1);
+    var numeroDia = (Math.floor((fechaActual - primeroEnero) / (24 * 60 * 60 * 1000))+1);
+    var numeroSemana = Math.floor((numeroDia+4)/7);
+    semana.selectedIndex = numeroSemana;    
+   
+}
+function cargarDistribuidores()
+{
+    
+    distribuidores.sort();
+    indice = 1;
+
+    for (value in distribuidores)
+    {
+        var option = document.createElement('option');        
+        option.value = indice; 
+        option.text = distribuidores[value];
+        distribuidor.add(option);
+        indice++;
+    }
+
+    var option = document.createElement('option'); 
+    option.value = '99'; 
+    option.text = '';
+    distribuidor.add(option);
+
+    var option = document.createElement('option'); 
+    option.value = '100'; 
+    option.text = 'Stock';
+    distribuidor.add(option);
 }
 //html load
 window.onload = function(event) 
 {
     semanaActual();
+    cargarDistribuidores();
 };
 
