@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Informe</title>
+        <link rel="icon" href="favicon.png">
+        <link rel="stylesheet" href="index.css">        
+    </head>
+    <body>
+        <div id="contenedor">
+            <div id="informacion">
+                <div id="box-error"></div>
+                <div id="titulo-pagina">planilla de informe</div>
+                <div class="box">
+                    <label for="tipo-informe">tipo de informe</label>
+                    <select name="tipo-informe" id="tipo-informe">
+                        <option value="0" selected disabled hidden></option>
+                        <option value="1">inventario</option>
+                        <option value="2">devolucion</option>
+                        <option value="3">recepcion de carga</option>
+                    </select>
+                </div>
+                <div class="box">
+                    <label for="semana">semana</label>
+                    <select name="semana" id="semana">
+                        <option value="0" selected disabled hidden></option>
+                        <option value="1">01/2022</option>
+                        <option value="2">02/2022</option>
+                        <option value="3">03/2022</option>
+                        <option value="4">04/2022</option>
+                        <option value="5">05/2022</option>
+                        <option value="6">06/2022</option>
+                        <option value="7">07/2022</option>
+                        <option value="8">08/2022</option>
+                        <option value="9">09/2022</option>
+                        <option value="10">10/2022</option>
+                        <option value="11">11/2022</option>
+                        <option value="12">12/2022</option>
+                        <option value="13">13/2022</option>
+                        <option value="14">14/2022</option>
+                        <option value="15">15/2022</option>
+                        <option value="16">16/2022</option>
+                        <option value="17">17/2022</option>
+                        <option value="18">18/2022</option>
+                        <option value="19">19/2022</option>
+                        <option value="20">20/2022</option>
+                        <option value="21">21/2022</option>
+                        <option value="22">22/2022</option>
+                        <option value="23">23/2022</option>
+                        <option value="24">24/2022</option>
+                        <option value="25">25/2022</option>
+                        <option value="26">26/2022</option>
+                        <option value="27">27/2022</option>
+                        <option value="28">28/2022</option>
+                        <option value="29">29/2022</option>
+                        <option value="30">30/2022</option>
+                        <option value="31">31/2022</option>
+                        <option value="32">32/2022</option>
+                        <option value="33">33/2022</option>
+                        <option value="34">34/2022</option>
+                        <option value="35">35/2022</option>
+                        <option value="36">36/2022</option>
+                        <option value="37">37/2022</option>
+                        <option value="38">38/2022</option>
+                        <option value="39">39/2022</option>
+                        <option value="40">40/2022</option>
+                        <option value="41">41/2022</option>
+                        <option value="42">42/2022</option>
+                        <option value="43">43/2022</option>
+                        <option value="44">44/2022</option>
+                        <option value="45">45/2022</option>
+                        <option value="46">46/2022</option>
+                        <option value="47">47/2022</option>
+                        <option value="48">48/2022</option>
+                        <option value="49">49/2022</option>
+                        <option value="50">50/2022</option>
+                        <option value="51">51/2022</option>
+                        <option value="52">52/2022</option>
+                        <option value="53">53/2022</option>
+                    </select> 
+                </div>
+                <div class="box">
+                    <label for="distribuidor">distribuidor</label>
+                    <select name="distribuidor" id="distribuidor">
+                        <option value="0" selected disabled hidden></option>
+                        <option value="1">claudia perez cobo</option>
+                        <option value="2">constanza oliva villagran</option>
+                        <option value="3">debora sanhueza yesca</option>
+                        <option value="4">elizabeth sanhueza cid</option>
+                        <option value="5">juan fernandez diaz</option>
+                        <option value="6">katherine sanhueza cid</option>
+                        <option value="7">lidia lepiqueo orellana</option>
+                        <option value="8">marcela pinchuleo concha</option>
+                        <option value="9">maria f. cornejo ibarra</option>
+                        <option value="10">maryori albornoz matamala</option>
+                        <option value="11">monica oliva quiroga</option>
+                        <option value="12">nayareth sanhueza valdez</option>
+                        <option value="13">paula jofre duran</option>
+                        <option value="14">priscila saez donoso</option>
+                        <option value="15">valentina cancino maldonado</option>
+                        <option value="16">violeta poblete soto</option>
+                        <option value="17">viviana soto oliva</option>
+                        <option value="18">yocelin sanhueza sanhueza</option>
+                        <option value="99"></option>
+                        <option value="98">stock</option>
+                    </select>    
+                </div>
+                <div class="box">
+                    <label for="estado">item estado</label>
+                    <div class="box-estado">
+                        <div class="item-estado">
+                            <input type="radio" name="item-estado" id="estado-bueno" checked>
+                            <label for="estado">bueno</label>                            
+                        </div>
+                        <div class="item-estado">
+                            <input type="radio" name="item-estado" id="estado-defecto">
+                            <label for="estado">con defecto</label>                            
+                        </div>                        
+                    </div> 
+                </div>
+                <div class="box" id="box-defecto">
+                    <label for="tipo-defecto">tipo de defecto</label>
+                    <select name="tipo-defecto" id="tipo-defecto">
+                        <option value="0" selected disabled hidden></option>
+                        <option value="1">adorno se cae</option>
+                        <option value="2">alambre suelto</option>
+                        <option value="3">arrugada</option>
+                        <option value="4">costura abierta</option>
+                        <option value="5">daño por polillas</option>
+                        <option value="6">defecto cremallera</option>
+                        <option value="7">defecto impresión</option>
+                        <option value="8">deshilachada</option>
+                        <option value="9">diferencia de tamaño</option>
+                        <option value="10">falta adorno</option>
+                        <option value="11">falta boton</option>
+                        <option value="12">falta par del conjunto</option>
+                        <option value="13">lavada o encogida</option>
+                        <option value="14">mal cosida</option>
+                        <option value="15">mal olor</option>
+                        <option value="16">manchada</option>
+                        <option value="17">marca de cigarro</option>
+                        <option value="18">otro</option>
+                        <option value="19">perforada</option>
+                        <option value="20">rayada</option>
+                        <option value="21">rota</option>
+                        <option value="22">sin coser</option>
+                        <option value="23">sin etiqueta</option>
+                        <option value="24">sucia</option>
+                        <option value="25">usada</option>
+                    </select>
+                </div>             
+                <div class="box">
+                    <label for="codigo">item codigo</label>
+                    <input type="number" name="codigo" id="codigo">
+                    <button id="boton-buscar"><i class="fas fa-search"></i></button> 
+                </div>
+                <div class="box">
+                    <label for="nombre">item nombre</label>
+                    <input type="text" name="nombre" id="nombre" disabled> 
+                </div>                
+                <div class="box">
+                    <label for="cantidad">item cantidad</label>
+                    <input type="number" name="cantidad" id="cantidad">
+                </div>                
+                <div class="box" id="box-botones">
+                    <button class="boton" id="boton-borrar">borrar todo</button>
+                    <button class="boton" id="boton-crear">cread pdf</button>
+                    <button class="boton" id="boton-agregar">agregar</button>
+                </div>
+            </div>            
+            <div id="pdf">
+                <div id="titulo-informe"></div>
+                <div id="titulo-semana"></div>
+                <div id="titulo-distribuidor"></div>
+                <div id="tabla">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="col-1">codigo</th>
+                                <th class="col-2">item</th>
+                                <th class="col-3">cantidad</th>
+                                <th class="col-4">accion</th>
+                                <th class="col-5">estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody-tabla"></tbody>
+                    </table>
+                </div>                
+                <div id="total">total item: 0</div>
+            </div>
+        </div>
+        <div id="modal">
+            <div id="modal-contenido">
+                <div id="titulo-consulta">buscar item por nombre</div>
+                <div id="box-consulta">
+                    <input type="text" name="consulta" id="consulta" placeholder="Ingrese minimo 3 letras">
+                    <button id="boton-consulta">buscar</button>
+                    <button id="boton-cerrar">cerrar</button>
+                </div>                
+                <table id="tabla-consulta">
+                    <thead>
+                        <tr>
+                            <th>codigo</th>
+                            <th>item</th>
+                            <th>accion</th>                            
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-consulta">
+                    </tbody>
+                </table>                
+            </div>
+        </div>     
+        <script src="https://kit.fontawesome.com/225ba68665.js" crossorigin="anonymous"></script>  
+        <script src="pdf.js"></script>   
+        <script src="items.js"></script>
+        <script src="index.js"></script>
+    </body>
+</html>
