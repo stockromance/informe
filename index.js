@@ -589,11 +589,11 @@ function crearPDF()
             };
             
             sortTable(tabla);
-            ocultarColumna('none', 'flex');
+            ocultarColumna('none', 'block');
 
             html2pdf().set(opt).from(element).save().then(function()
             {
-                ocultarColumna('flex', 'none');                
+                ocultarColumna('block', 'none');                
                 codigo.focus();
             });
         }
