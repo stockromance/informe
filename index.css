@@ -16,17 +16,14 @@ html, body
 {
     width: 100%;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
     overscroll-behavior: contain;
 }
 #contenedor
 {    
     display: grid;
-    grid-template-areas:    '.   principal    .'
+    grid-template-areas:    '.   principal      .'
                             '.   pdf            .';
-    grid-template-rows: auto auto;
+    grid-template-rows:     auto auto;
     grid-template-columns: auto minmax(auto, 600px) auto;    
 }
 #principal 
