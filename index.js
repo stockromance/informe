@@ -562,13 +562,13 @@ function crearPDF()
     var textoSemana = semana.options[semana.selectedIndex].text;
     var textoDistribuidor = distribuidor.options[distribuidor.selectedIndex].text;
 
-    tituloInforme.innerHTML = 'INFORME&nbsp;DE&nbsp;'+textoTipoInforme;                       
-    tituloDistribuidor.innerHTML = 'DISTRIBUIDOR:&nbsp;'+textoDistribuidor;            
-    tituloSemana.innerHTML = 'SEMANA&nbsp;N°&nbsp;'+textoSemana;
+    tituloInforme.innerHTML = 'informe&nbsp;de&nbsp;'+textoTipoInforme;                       
+    tituloDistribuidor.innerHTML = 'distribuidor:&nbsp;'+textoDistribuidor;            
+    tituloSemana.innerHTML = 'semana&nbsp;n°&nbsp;'+textoSemana;
 
     var fecha = new Date();
 
-    tituloCreado.innerHTML = 'CREADO:&nbsp;'+fecha.toLocaleDateString()+'&nbsp;'+fecha.toLocaleTimeString();  
+    tituloCreado.innerHTML = 'creado:&nbsp;'+fecha.toLocaleDateString()+'&nbsp;'+fecha.toLocaleTimeString();  
 
     var filas = tbodyTabla.rows.length;
     
