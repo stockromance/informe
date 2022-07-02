@@ -20,15 +20,15 @@ const botonAgregar = document.querySelector('#boton-agregar');
 // PDF
 const pdf = document.querySelector('#pdf');
 const encabezadoPdf = document.querySelector('#encabezado-pdf');
-const nombreInforme = document.querySelector('#nombre-informe');
-const nombreDistribuidor = document.querySelector('#nombre-distribuidor');
-const nombreSemana = document.querySelector('#nombre-semana');
-const creado = document.querySelector('#creado'); 
+const tituloInforme = document.querySelector('#titulo-informe');
+const tituloDistribuidor = document.querySelector('#titulo-distribuidor');
+const tituloSemana = document.querySelector('#titulo-semana');
+const tituloCreado = document.querySelector('#titulo-creado'); 
 // TABLA
 const tabla = document.querySelector('table');
 const tbodyTabla = document.querySelector('#tbody-tabla');
 const botonEliminar = document.querySelectorAll(".boton-eliminar");
-const total = document.querySelector('#total');
+const tituloTotal = document.querySelector('#titulo-total');
 // MODAL
 const modal = document.querySelector('#modal');
 const consulta = document.querySelector('#consulta');
@@ -399,7 +399,7 @@ function sumarItems()
     {
         suma = parseInt(num.innerHTML) + suma;            
     });
-    total.innerHTML = suma;
+    tituloTotal.innerHTML = 'TOTAL&nbsp;ITEM:&nbsp;'+suma;
 }
 //LIMPIAR
 function limpiarDatos()
@@ -558,24 +558,24 @@ botonCrear.addEventListener('click', function()
 });
 function crearPDF()
 {
+    var textoTipoInforme = tipoInforme.options[tipoInforme.selectedIndex].text;
+    var textoSemana = semana.options[semana.selectedIndex].text;
+    var textoDistribuidor = distribuidor.options[distribuidor.selectedIndex].text;
+
+    tituloInforme.innerHTML = 'INFORME&nbsp;DE&nbsp;'+textoTipoInforme;                       
+    tituloDistribuidor.innerHTML = 'DISTRIBUIDOR:&nbsp;'+textoDistribuidor;            
+    tituloSemana.innerHTML = 'SEMANA&nbsp;N°&nbsp;'+textoSemana;
+
+    var fecha = new Date();
+
+    tituloCreado.innerHTML = 'CREADO:&nbsp;'+fecha.toLocaleDateString()+'&nbsp;'+fecha.toLocaleTimeString();  
+
     var filas = tbodyTabla.rows.length;
     
     if(filas > 0)
     {
         if(tipoInforme.value != 0 && semana.value != 0 && distribuidor.value != 0 && distribuidor.value != 99)
-        {
-            var textoTipoInforme = tipoInforme.options[tipoInforme.selectedIndex].text;
-            var textoSemana = semana.options[semana.selectedIndex].text;
-            var textoDistribuidor = distribuidor.options[distribuidor.selectedIndex].text;
-
-            nombreInforme.innerHTML = textoTipoInforme;                       
-            nombreDistribuidor.innerHTML = textoDistribuidor;            
-            nombreSemana.innerHTML = textoSemana;
-
-            var fecha = new Date();
-
-            creado.innerHTML = fecha.toLocaleDateString()+'&nbsp;'+fecha.toLocaleTimeString();  
-            
+        {   
             var element = pdf;            
             var nombrePDF = textoTipoInforme.substring(0,3).toUpperCase()+'-'+textoSemana+'-'+textoDistribuidor.toUpperCase();
                     

@@ -150,26 +150,26 @@ html, body
     width: 100%;
     text-align: center;
 }
-#titulo-informe, #titulo-informe span 
+#titulo-informe
 {
     font-size: 22px;
     font-weight: bold;
 }
-#titulo-distribuidor, #titulo-distribuidor span 
+#titulo-distribuidor
 {
     font-size: 22px;    
     font-weight: bold;    
 }
-#titulo-semana, #titulo-semana span 
+#titulo-semana
 {
     font-size: 22px;
 }
-#titulo-creado, #titulo-creado span
+#titulo-creado
 {
     font-size: 16px; 
     margin-bottom: 15px;
 }
-#titulo-total, #titulo-total span 
+#titulo-total
 {
     font-size: 16px;
     font-weight: bold;
