@@ -97,7 +97,7 @@ codigo.addEventListener('input', function()
 
         if(codigo.value.length == 5)
         {
-            setTimeout(funtion(){buscarItem();},200);            
+            buscarItem();         
         }
         else
         {
