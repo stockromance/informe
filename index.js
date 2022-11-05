@@ -97,7 +97,7 @@ codigo.addEventListener('input', function()
 
         if(codigo.value.length == 5)
         {
-            setTimeout(function(){buscarItem();},200);        
+            setTimeout(function(){buscarItem();},150);        
         }
         else
         {
@@ -581,7 +581,7 @@ function crearPDF()
                     
             var opt = 
             {
-                margin:       [0.5, 1, 0.5, 1],
+                margin:       [0.5, 1.5, 0.5, 1.5],
                 filename:     nombrePDF+'.pdf',
                 image:        { type: 'jpeg', quality: 0.98 },
                 html2canvas:  { scale: 3 },
