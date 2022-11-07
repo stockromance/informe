@@ -606,7 +606,7 @@ m2Codigo.addEventListener('input', function()
                     else
                     {
                         m2Nombre.value = 'no identificado';
-                        m2AgregarItem('000000', m2Nombre.value, '1', true);  
+                        m2AgregarItem('00000', m2Nombre.value, '1', true);  
                     }
                 },150);  //TIEMPO PARA LEER CODIGO LARGOS CON LECTOR DE BARRA      
         }
