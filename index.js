@@ -600,11 +600,13 @@ m2Codigo.addEventListener('input', function()
                 {
                     if(itemExiste(m2Codigo.value))
                     {
-                        m2Nombre.value = itemNombre(m2Codigo.value);      
+                        m2Nombre.value = itemNombre(m2Codigo.value);
+                        validarItem(m2Codigo.value, m2Nombre.value, '1');
                     }
                     else
                     {
-                        m2Nombre.value = 'no identificado'; 
+                        m2Nombre.value = 'no identificado';
+                        m2AgregarItem(m2Codigo.value, m2Nombre.value, '1', false);  
                     }
                 },150);  //TIEMPO PARA LEER CODIGO LARGOS CON LECTOR DE BARRA      
         }
