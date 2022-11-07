@@ -601,7 +601,7 @@ m2Codigo.addEventListener('input', function()
                     if(itemExiste(m2Codigo.value))
                     {
                         m2Nombre.value = itemNombre(m2Codigo.value);
-                        validarItem(m2Codigo.value, m2Nombre.value, '1');
+                        m2AgregarItem(m2Codigo.value, m2Nombre.value, '1', true);
                     }
                     else
                     {
