@@ -663,7 +663,9 @@ function m2AgregarItem(codigo, nombre, cantidad, existe)
     {
         agregarItem(codigo, nombre, cantidad, '1');
         m2Codigo.focus();
-    }    
+    }  
+    m2Codigo.value = '';
+    m2Codigo.focus();
 }
 // MODAL-3
 var m3Tr;
