@@ -12,7 +12,7 @@
         <div id="contenedor">
             <div id="principal">
                 <div id="error"></div>
-                <div id="titulo-principal">planilla de informe</div>
+                <div id="titulo">planilla de informe</div>
                 <div class="box">
                     <label for="tipo-informe">tipo de informe</label>
                     <select id="tipo-informe">
@@ -29,17 +29,17 @@
                         <option value="1">claudia perez cobo</option>
                         <option value="2">constanza oliva villagran</option>
                         <option value="3">debora sanhueza yesca</option>                        
-                        <option value="5">elizabeth sanhueza cid</option>
-                        <option value="4">fredna cardenas yanez</option>
+                        <option value="4">elizabeth sanhueza cid</option>
+                        <option value="5">fredna cardenas yanez</option>
                         <option value="6">juan fernandez diaz</option>
                         <option value="7">katherine sanhueza cid</option>
                         <option value="8">lidia lepiqueo orellana</option>
-                        <option value="20">maria ema pereira</option>
-                        <option value="9">maria f. cornejo ibarra</option>
-                        <option value="10">maryori albornoz matamala</option>
-                        <option value="11">monica oliva quiroga</option>
-                        <option value="12">nayareth sanhueza valdez</option>
-                        <option value="13">pamela hernandez araya</option>
+                        <option value="9">maria ema pereira</option>
+                        <option value="10">maria f. cornejo ibarra</option>
+                        <option value="11">maryori albornoz matamala</option>
+                        <option value="12">monica oliva quiroga</option>
+                        <option value="13">nayareth sanhueza valdez</option>
+                        <option value="14">pamela hernandez araya</option>
                         <option value="15">tamara troncoso troncoso</option>
                         <option value="16">violeta poblete soto</option>
                         <option value="17">viviana herrera silva</option>
@@ -108,47 +108,47 @@
                     </select> 
                 </div>
                 <div class="box">
-                    <label for="box-estado">item estado</label>
+                    <label for="estado">item estado</label>
                     <div id="box-estado">
-                        <div class="box-estado-item">
-                            <input type="radio" name="item-estado" id="estado-bueno" checked>
+                        <div class="estado-item">
+                            <input type="radio" name="estado-item" id="estado-bueno" checked>
                             <label for="estado-bueno">bueno</label>                            
                         </div>
-                        <div class="box-estado-item">
-                            <input type="radio" name="item-estado" id="estado-defecto">
+                        <div class="estado-item">
+                            <input type="radio" name="estado-item" id="estado-defecto">
                             <label for="estado-defecto">con defecto</label>                            
                         </div>                        
                     </div> 
                 </div>
                 <div class="box" id="box-defecto">
-                    <label for="tipo-defecto">tipo de defecto</label>
-                    <select id="tipo-defecto">
+                    <label for="defecto">tipo de defecto</label>
+                    <select id="defecto">
                         <option value="0" selected disabled hidden></option>
                         <option value="1">adorno se cae</option>
                         <option value="2">alambre suelto</option>
-                        <option value="3">arrugada</option>
+                        <option value="3">arrugado</option>
                         <option value="4">costura abierta</option>
                         <option value="5">daño por polillas</option>
                         <option value="6">defecto cremallera</option>
                         <option value="7">defecto impresion</option>
-                        <option value="8">deshilachada</option>
+                        <option value="8">deshilachado</option>
                         <option value="9">diferencia de tamaño</option>
                         <option value="10">falta adorno</option>
                         <option value="11">falta boton</option>
                         <option value="12">falta par del conjunto</option>
-                        <option value="13">lavada o encogida</option>
-                        <option value="14">mal cosida</option>
+                        <option value="13">lavado o encogido</option>
+                        <option value="14">mal cosido</option>
                         <option value="15">mal olor</option>
-                        <option value="16">manchada</option>
+                        <option value="16">manchado</option>
                         <option value="17">marca de cigarro</option>
                         <option value="18">otro</option>
-                        <option value="19">perforada</option>
-                        <option value="20">rayada</option>
-                        <option value="21">rota</option>
+                        <option value="19">perforado</option>
+                        <option value="20">rayado</option>
+                        <option value="21">roto</option>
                         <option value="22">sin coser</option>
                         <option value="23">sin etiqueta</option>
-                        <option value="24">sucia</option>
-                        <option value="25">usada</option>
+                        <option value="24">sucio</option>
+                        <option value="25">usado</option>
                     </select>
                 </div>
                 <div class="box">
@@ -163,46 +163,49 @@
                 <div class="box">
                     <label for="cantidad">item cantidad</label>
                     <input type="number" id="cantidad">
-                </div>                
+                </div>  
                 <div class="box" id="box-botones">
-                    <button class="boton" id="boton-borrar">borrar todo</button>
+                    <button class="boton" id="boton-limpiar">limpiar</button>
                     <button class="boton" id="boton-crear">crear pdf</button>
+                    <button class="boton" id="boton-bipear">bipear</button>
                     <button class="boton" id="boton-agregar">agregar</button>
                 </div>          
             </div>
             <div id="pdf">
-                <div id="encabezado-pdf">
-                    <div class="titulo-encabezado" id="titulo-informe"></div>
-                    <div class="titulo-encabezado" id="titulo-distribuidor"></div>
-                    <div class="titulo-encabezado" id="titulo-semana"></div>                    
-                    <div class="titulo-encabezado" id="titulo-creado"></div>
+                <div id="pdf-encabezado">
+                    <div class="pdf-titulo" id="titulo-informe"></div>
+                    <div class="pdf-titulo" id="titulo-distribuidor"></div>
+                    <div class="pdf-titulo" id="titulo-semana"></div>                    
+                    <div class="pdf-titulo" id="titulo-fecha"></div>
                 </div>                
                 <div id="tabla">
                     <table>
                         <thead>
                             <tr>
                                 <th class="col-1">codigo</th>
-                                <th class="col-2">item</th>
+                                <th class="col-2" id="item-encabezado">item</th>
                                 <th class="col-3">cantidad</th>
-                                <th class="col-4">accion</th>
-                                <th class="col-5">estado</th>
+                                <th class="col-4">editar</th>
+                                <th class="col-5">borrar</th>
+                                <th class="col-6">estado</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody-tabla"></tbody>
+                        <tbody id="tbody">
+                        </tbody>
                     </table>
                 </div> 
-                <div id="titulo-total">TOTAL&nbsp;ITEM:&nbsp;0</div>          
+                <div id="total">total item: 0</div>          
             </div>
         </div>
-        <div id="modal">
-            <div id="modal-contenido">
-                <div id="titulo-consulta">buscar item por nombre</div>
-                <div id="box-consulta">
-                    <input type="text" id="consulta" placeholder="Ingrese minimo 3 letras">
-                    <button id="boton-consulta">buscar</button>
-                    <button id="boton-cerrar">cerrar</button>
+        <div id="modal-1">
+            <div id="m1-contenido">
+                <div id="m1-titulo">buscar item por nombre</div>
+                <div id="m1-box">
+                    <input type="text" id="m1-consulta" placeholder="ingrese minimo 3 letras">
+                    <button id="m1-buscar">buscar</button>
+                    <button id="m1-cerrar">cerrar</button>
                 </div>                
-                <table id="tabla-consulta">
+                <table id="m1-tabla">
                     <thead>
                         <tr>
                             <th>codigo</th>
@@ -210,9 +213,41 @@
                             <th>accion</th>                            
                         </tr>
                     </thead>
-                    <tbody id="tbody-consulta">
+                    <tbody id="m1-tbody">
                     </tbody>
                 </table>                
+            </div>
+        </div>   
+        <div id="modal-2">
+            <div id="m2-contenido">
+                <div id="m2-titulo">ingresar item 1 en 1</div>
+                <div id="m2-box">
+                    <input type="number" id="m2-codigo" placeholder="codigo">
+                    <input type="text" id="m2-nombre" disabled>
+                    <button id="m2-agregar">agregar</button>
+                    <button id="m2-cerrar">cerrar</button>
+                </div>                
+                <table id="m2-tabla">
+                    <thead>
+                        <tr>
+                            <th>codigo</th>
+                            <th>item</th>
+                            <th>cantidad</th>                          
+                        </tr>
+                    </thead>
+                    <tbody id="m2-tbody">
+                    </tbody>
+                </table>                
+            </div>
+        </div>  
+        <div id="modal-3">
+            <div id="m3-contenido">
+                <div id="m3-titulo">editar cantidad</div>
+                <div id="m3-box">
+                    <input type="number" id="m3-cantidad">
+                    <button id="m3-guardar">guardar</button>
+                    <button id="m3-cerrar">cerrar</button>
+                </div>        
             </div>
         </div>     
         <script src="https://kit.fontawesome.com/225ba68665.js" crossorigin="anonymous"></script>  
