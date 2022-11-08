@@ -46,6 +46,7 @@ const m2Agregar = document.querySelector('#m2-agregar');
 const m2Cerrar = document.querySelector('#m2-cerrar'); 
 const m2Tabla = document.querySelector('#m2-tabla'); 
 const m2Tbody = document.querySelector('#m2-tbody'); 
+const m2Cod = document.querySelector('#m2-cod');
 // MODAL-3
 const modal3 = document.querySelector('#modal-3');
 const m3Cantidad = document.querySelector('#m3-cantidad');
@@ -148,7 +149,7 @@ codigo.addEventListener('input', function()
                         nombre.disabled = false;
                         nombre.focus(); 
                     }
-                },150);  //TIEMPO PARA LEER CODIGO LARGOS CON LECTOR DE BARRA      
+                },200);  //TIEMPO PARA LEER CODIGO LARGOS CON LECTOR DE BARRA      
         }
         else
         {
@@ -543,10 +544,15 @@ function m1Agregar(e)
     cantidad.focus();
     modal1.style.display = 'none'; 
 }
+
+
+
+//////////////////////////////////////////////////////////////////////
 // MODAL-2
 botonBipear.addEventListener('click', function() 
 {
     m2Codigo.value = '';
+    m2Nombre.value = '';
     modal2.style.display = 'flex';
     m2Codigo.focus(); 
 });
@@ -554,79 +560,77 @@ m2Cerrar.addEventListener('click', function()
 { 
     modal2.style.display = 'none';       
     m2Codigo.value = ''; 
+    m2Nombre.value = '';
     codigo.focus();
 });
 m2Agregar.addEventListener('click', function() 
 { 
-    if(m2Codigo.length == 5 || m2Nombre.value != '')
+    if(m2Codigo.value.length == 5 || m2Nombre.value != '')
     {
-       if(m2Nombre.value == 'no identificado')
-       {
-            m2AgregarItem('00000', m2Nombre.value, '1', true);   
-       }
-       else
-       {
-            m2AgregarItem(m2Codigo.value, m2Nombre.value, '1', true);
-       }             
-    }     
+        m2AgregarItem(m2Codigo.value, m2Nombre.value, '1', true);            
+    }  
+    else
+    {
+        m2Codigo.focus();
+    }   
 });
+function m2AgregarItem(codigo, nombre, cantidad, existe)
+{
+    m2Codigo.value = '';
+    m2Nombre.value = '';
+
+    var row = m2Tbody.insertRow(0);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    
+    cell1.innerHTML = codigo;
+    cell2.innerHTML = nombre;
+    cell3.innerHTML = cantidad;
+
+    if(existe == true)
+    {
+        validarItem(codigo, nombre, cantidad);
+        m2Cod.value = '';
+        m2Codigo.focus();
+    }
+    else
+    {
+        //no existe en items.js
+        m2Codigo.focus();
+    }  
+}
 m2Codigo.addEventListener('input', function()
 {
-    m2Nombre.value = '';
-    var numeros = ['0','1','2','3','4','5','6','7','8','9'];
-    var valor = m2Codigo.value.toString();
-    var nuevoValor = '';
-
-    if(valor.length >= 5)
+    if(m2Codigo.value.length==5)
     {
-        for(var i = 0; i < valor.length; i++)
-        {
-            if(numeros.includes(valor[i]))
-            {
-                nuevoValor += valor[i];
-            }
-            else
-            {
-                //...
-            }
-        }
-
-        nuevoValor = nuevoValor.substring(0,5);
-        m2Codigo.value = nuevoValor;
-
-        if(m2Codigo.value.length == 5)
-        {
-            setTimeout(function()
+        m2Cod.value = m2Codigo.value;
+        setTimeout(function()
                 {
-                    if(itemExiste(m2Codigo.value))
+                    if(itemExiste(m2Cod.value))
                     {
-                        m2Nombre.value = itemNombre(m2Codigo.value);
+                        m2Nombre.value = itemNombre(m2Codigo.value);                   
                         m2AgregarItem(m2Codigo.value, m2Nombre.value, '1', true);
                     }
                     else
                     {
-                        m2Nombre.value = 'no identificado';
-                        m2AgregarItem('00000', m2Nombre.value, '1', true);  
+                        m2Codigo.value='';
+                        m2Cod.value = '';
+                        alert('ERROR LECTURA CODIGO');
                     }
-                },150);  //TIEMPO PARA LEER CODIGO LARGOS CON LECTOR DE BARRA      
-        }
-        else
-        {
-            //..,
-        }      
-    }
-    else
-    {
-        //...
+                },200);  //TIEMPO PARA LEER CODIGO LARGOS CON LECTOR DE BARRA      
     }
 });
 m2Codigo.addEventListener('keydown', function(e)
-{
-    var key = e.keyCode;
+{    
+    var key = e.keyCode; 
     
     if(key == 13) //TECLA ENTER
     {
-        m2Agregar.focus();
+        if(m2Codigo.value.length == 5 || m2Nombre.value != '')
+        {
+            m2Agregar.focus();
+        }        
     }     
     else if((key >= 48 && key <= 57) || (key >= 96 && key <= 105))
     {
@@ -641,32 +645,8 @@ m2Codigo.addEventListener('keydown', function(e)
         e.preventDefault();
     }
 });
-function m2AgregarItem(codigo, nombre, cantidad, existe)
-{
-    m2Codigo.value = '';
 
-    var row = m2Tbody.insertRow(0);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    
-    cell1.innerHTML = codigo;
-    cell2.innerHTML = nombre;
-    cell3.innerHTML = cantidad;
-
-    if(existe == true)
-    {
-        validarItem(codigo, nombre, cantidad);
-        m2Codigo.focus();
-    }
-    else
-    {
-        agregarItem(codigo, nombre, cantidad, '1');
-        m2Codigo.focus();
-    }  
-    m2Codigo.value = '';
-    m2Codigo.focus();
-}
+////////////////////////////////////////////////////////////////////////////
 // MODAL-3
 var m3Tr;
 

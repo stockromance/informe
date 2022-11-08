@@ -385,6 +385,7 @@ thead .col-1, thead .col-2, thead .col-3, thead .col-4, thead .col-5, thead .col
     display: flex;
     flex-direction: column;
     align-items: center;
+    overflow: auto;
 }
 #m2-contenido
 {
@@ -402,8 +403,8 @@ thead .col-1, thead .col-2, thead .col-3, thead .col-4, thead .col-5, thead .col
     align-items: center;
     justify-content: space-between; 
     width: 100%;    
-    padding-top: 5px;
-    padding-bottom: 15px;
+    padding-top: 10px;
+    padding-bottom: 20px;
 }
 #m2-titulo 
 {    
@@ -419,7 +420,7 @@ thead .col-1, thead .col-2, thead .col-3, thead .col-4, thead .col-5, thead .col
 #m2-cerrar i
 {
     color: #444444;
-    font-size: 18px;
+    font-size: 20px;
 }
 #m2-box
 {
