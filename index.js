@@ -326,7 +326,7 @@ botonLimpiar.addEventListener('click', function()
     
     if(filas > 0)
     {
-        var confirmar = confirm('¿LIMPIAR TABLA?');
+        var confirmar = confirm('¿LIMPIAR INFORMACION?');
 
         if(confirmar == true)
         {
