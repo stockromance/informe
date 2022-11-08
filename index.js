@@ -331,6 +331,7 @@ botonLimpiar.addEventListener('click', function()
         if(confirmar == true)
         {
             tbody.innerHTML = '';
+            m2Tbody.innerHTML = '';
             sumarItems();
             limpiarDatos();
         }
