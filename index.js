@@ -545,10 +545,6 @@ function m1Agregar(e)
     cantidad.focus();
     modal1.style.display = 'none'; 
 }
-
-
-
-//////////////////////////////////////////////////////////////////////
 // MODAL-2
 botonBipear.addEventListener('click', function() 
 {
@@ -568,18 +564,15 @@ m2Agregar.addEventListener('click', function()
 { 
     if(m2Codigo.value.length == 5 || m2Nombre.value != '')
     {
-        m2AgregarItem(m2Codigo.value, m2Nombre.value, '1', true);            
+        m2BuscarItem();          
     }  
     else
     {
         m2Codigo.focus();
     }   
 });
-function m2AgregarItem(codigo, nombre, cantidad, existe)
+function m2AgregarItem(codigo, nombre, cantidad)
 {
-    m2Codigo.value = '';
-    m2Nombre.value = '';
-
     var row = m2Tbody.insertRow(0);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
@@ -589,50 +582,40 @@ function m2AgregarItem(codigo, nombre, cantidad, existe)
     cell2.innerHTML = nombre;
     cell3.innerHTML = cantidad;
 
-    if(existe == true)
+    validarItem(codigo, nombre, cantidad);
+    m2Codigo.value = '';
+    m2Nombre.value = '';
+    m2Codigo.focus();
+}
+function m2BuscarItem()
+{
+    if(itemExiste(m2Codigo.value))
     {
-        validarItem(codigo, nombre, cantidad);
-        m2Cod.value = '';
-        m2Codigo.focus();
+        m2Nombre.value = itemNombre(m2Codigo.value);                   
+        m2AgregarItem(m2Codigo.value, m2Nombre.value, '1');
     }
     else
     {
-        //no existe en items.js
-        m2Codigo.focus();
-    }  
-}
-m2Codigo.addEventListener('input', function()
-{
-    if(m2Codigo.value.length==5)
-    {
-        m2Cod.value = m2Codigo.value;
-        setTimeout(function()
-                {
-                    if(itemExiste(m2Cod.value))
-                    {
-                        m2Nombre.value = itemNombre(m2Codigo.value);                   
-                        m2AgregarItem(m2Codigo.value, m2Nombre.value, '1', true);
-                    }
-                    else
-                    {
-                        m2Codigo.value='';
-                        m2Cod.value = '';
-                        alert('ERROR LECTURA CODIGO');
-                    }
-                },200);  //TIEMPO PARA LEER CODIGO LARGOS CON LECTOR DE BARRA      
+        m2Codigo.value='';
+        m2Nombre.value='';
+        alert('ERROR LECTURA CODIGO');
     }
-});
+}
 m2Codigo.addEventListener('keydown', function(e)
 {    
     var key = e.keyCode; 
-    
-    if(key == 13) //TECLA ENTER
+
+    if(key == 13) 
     {
-        if(m2Codigo.value.length == 5 || m2Nombre.value != '')
-        {
-            m2Agregar.focus();
-        }        
-    }     
+        //tecla enter
+        m2BuscarItem();
+    }
+    else if(key == 9) 
+    {
+        //tecla tab
+        e.preventDefault();
+        m2BuscarItem();
+    }
     else if((key >= 48 && key <= 57) || (key >= 96 && key <= 105))
     {
         //numeros: teclado y teclado numerico   
@@ -642,12 +625,10 @@ m2Codigo.addEventListener('keydown', function(e)
         //izquierda, derecha, suprimir, borrar, tab
     }
     else
-    {
+    {        
         e.preventDefault();
     }
 });
-
-////////////////////////////////////////////////////////////////////////////
 // MODAL-3
 var m3Tr;
 
