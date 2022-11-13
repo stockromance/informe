@@ -106,98 +106,7 @@ function itemNombre(codigo)
     nombre = filtro[0].nombre.toUpperCase();        
     return nombre;
 }
-//TECLEO Y/O INGRESOS EN INPUT CODIGO
-codigo.addEventListener('input', function()
-{
-    nombre.disabled = true;
-    nombre.value = '';
-    cantidad.value = '';
-
-    var numeros = ['0','1','2','3','4','5','6','7','8','9'];
-    var valor = codigo.value.toString();
-    var nuevoValor = '';
-
-    if(valor.length >= 5)
-    {
-        for(var i = 0; i < valor.length; i++)
-        {
-            if(numeros.includes(valor[i]))
-            {
-                nuevoValor += valor[i];
-            }
-            else
-            {
-                //...
-            }
-        }
-
-        nuevoValor = nuevoValor.substring(0,5);
-        codigo.value = nuevoValor;
-
-        if(codigo.value.length == 5)
-        {
-            setTimeout(function()
-                {
-                    if(itemExiste(codigo.value))
-                    {
-                        nombre.value = itemNombre(codigo.value);        
-                        nombre.disabled = true;                   
-                        cantidad.focus();
-                    }
-                    else
-                    {
-                        nombre.disabled = false;
-                        nombre.focus(); 
-                    }
-                },200);  //TIEMPO PARA LEER CODIGO LARGOS CON LECTOR DE BARRA      
-        }
-        else
-        {
-            //..
-        }      
-    }
-    else
-    {
-        //...
-    }
-});
-//TECLEO Y/O INGRESOS EN INPUT CANTIDAD
-cantidad.addEventListener('input', function()
-{    
-    var numeros = ['0','1','2','3','4','5','6','7','8','9'];
-    var entero = parseInt(cantidad.value);
-    var valor = cantidad.value.toString();
-    var nuevoValor = '';
-
-    if(entero > 0)
-    {
-        if(valor.length >= 3) 
-        {
-            for(var i = 0; i < valor.length; i++) 
-            {
-                if(numeros.includes(valor[i])) 
-                {
-                    nuevoValor += valor[i];
-                }
-                else 
-                {
-                    //...
-                }
-            }
-            nuevoValor = nuevoValor.substring(0,3);
-            cantidad.value = nuevoValor;   
-        }
-        else 
-        {
-            //...
-        }  
-    }
-    else
-    {
-        cantidad.value = nuevoValor; 
-    }
-}); 
-//PRESIONAR ENTER & RESTRINGIR SOLO-NUMEROS
+//CHECK VACIOS 
 function siguienteFocus()
 {
     if(codigo.value == '')
@@ -221,31 +130,86 @@ function siguienteFocus()
         botonAgregar.focus();
     }
 }
+codigo.addEventListener('input', function()
+{
+    if(codigo.value.length < 5)
+    {
+        nombre.disabled = true;
+        nombre.value = '';
+        cantidad.value = '';
+    }
+    if(codigo.value.length > 5)
+    {
+        codigo.value = codigo.value.substring(0,5);
+    } 
+});
+cantidad.addEventListener('input', function()
+{   
+    if(cantidad.value.length > 3)
+    {
+        cantidad.value = cantidad.value.substring(0,3);
+    } 
+});
 codigo.addEventListener('keydown', function(e)
 {
     var key = e.keyCode;
-    
-    if(key == 13) //TECLA ENTER
+
+    if(key == 13) 
     {
+        //tecla enter
         if(codigo.value.length == 5)
         {
-            siguienteFocus();
+            if(itemExiste(codigo.value))
+            {
+                nombre.value = itemNombre(codigo.value);        
+                nombre.disabled = true;                   
+                cantidad.focus();
+            }
+            else
+            {
+                nombre.disabled = false;
+                nombre.focus(); 
+            }
+        }
+        else
+        {
+            //..
+        }      
+    }
+    else if(key == 9) 
+    {
+        //tecla tab
+        e.preventDefault();
+
+        if(codigo.value.length == 5)
+        {
+            if(itemExiste(codigo.value))
+            {
+                nombre.value = itemNombre(codigo.value);        
+                nombre.disabled = true;                   
+                cantidad.focus();
+            }
+            else
+            {
+                nombre.disabled = false;
+                nombre.focus(); 
+            }
         }
         else
         {
             //...
         }
-    }     
+    }
     else if((key >= 48 && key <= 57) || (key >= 96 && key <= 105))
     {
-        //numeros: teclado y teclado numerico   
+        //numeros: teclado y teclado numerico        
     }    
-    else if(key == 37 || key == 39 || key == 8 || key == 46 || key == 9)
+    else if(key == 37 || key == 39 || key == 8 || key == 46)
     {
         //izquierda, derecha, suprimir, borrar, tab
     }
     else
-    {
+    {        
         e.preventDefault();
     }
 });
@@ -601,6 +565,17 @@ function m2BuscarItem()
         alert('ERROR LECTURA CODIGO');
     }
 }
+m2Codigo.addEventListener('input', function()
+{
+    if(m2Codigo.value.length < 5)
+    {
+        m2Nombre.value = '';
+    }
+    if(m2Codigo.value.length > 5)
+    {
+        m2Codigo.value = m2Codigo.value.substring(0,5);
+    } 
+});
 m2Codigo.addEventListener('keydown', function(e)
 {    
     var key = e.keyCode; 
