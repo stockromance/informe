@@ -106,98 +106,7 @@ function itemNombre(codigo)
     nombre = filtro[0].nombre.toUpperCase();        
     return nombre;
 }
-//TECLEO Y/O INGRESOS EN INPUT CODIGO
-codigo.addEventListener('input', function()
-{
-    nombre.disabled = true;
-    nombre.value = '';
-    cantidad.value = '';
-
-    var numeros = ['0','1','2','3','4','5','6','7','8','9'];
-    var valor = codigo.value.toString();
-    var nuevoValor = '';
-
-    if(valor.length >= 5)
-    {
-        for(var i = 0; i < valor.length; i++)
-        {
-            if(numeros.includes(valor[i]))
-            {
-                nuevoValor += valor[i];
-            }
-            else
-            {
-                //...
-            }
-        }
-
-        nuevoValor = nuevoValor.substring(0,5);
-        codigo.value = nuevoValor;
-
-        if(codigo.value.length == 5)
-        {
-            setTimeout(function()
-                {
-                    if(itemExiste(codigo.value))
-                    {
-                        nombre.value = itemNombre(codigo.value);        
-                        nombre.disabled = true;                   
-                        cantidad.focus();
-                    }
-                    else
-                    {
-                        nombre.disabled = false;
-                        nombre.focus(); 
-                    }
-                },200);  //TIEMPO PARA LEER CODIGO LARGOS CON LECTOR DE BARRA      
-        }
-        else
-        {
-            //..
-        }      
-    }
-    else
-    {
-        //...
-    }
-});
-//TECLEO Y/O INGRESOS EN INPUT CANTIDAD
-cantidad.addEventListener('input', function()
-{    
-    var numeros = ['0','1','2','3','4','5','6','7','8','9'];
-    var entero = parseInt(cantidad.value);
-    var valor = cantidad.value.toString();
-    var nuevoValor = '';
-
-    if(entero > 0)
-    {
-        if(valor.length >= 3) 
-        {
-            for(var i = 0; i < valor.length; i++) 
-            {
-                if(numeros.includes(valor[i])) 
-                {
-                    nuevoValor += valor[i];
-                }
-                else 
-                {
-                    //...
-                }
-            }
-            nuevoValor = nuevoValor.substring(0,3);
-            cantidad.value = nuevoValor;   
-        }
-        else 
-        {
-            //...
-        }  
-    }
-    else
-    {
-        cantidad.value = nuevoValor; 
-    }
-}); 
-//PRESIONAR ENTER & RESTRINGIR SOLO-NUMEROS
+//CHECK VACIOS
 function siguienteFocus()
 {
     if(codigo.value == '')
@@ -221,34 +130,62 @@ function siguienteFocus()
         botonAgregar.focus();
     }
 }
-codigo.addEventListener('keydown', function(e)
+/////////////CODIGO NOMBRE CANTIDAD
+codigo.addEventListener('input', function()
 {
-    var key = e.keyCode;
-    
-    if(key == 13) //TECLA ENTER
+    if(codigo.value.length < 5)
     {
-        if(codigo.value.length == 5)
+        nombre.disabled = true;
+        nombre.value = '';
+        cantidad.value = '';
+    }
+    if(codigo.value.length > 5)
+    {
+        codigo.value = codigo.value.substring(0,5);
+    } 
+    if(codigo.value.length == 5)
+    {
+        if(itemExiste(codigo.value))
         {
-            siguienteFocus();
+            nombre.value = itemNombre(codigo.value);        
+            nombre.disabled = true;   
         }
         else
         {
-            //...
+            nombre.disabled = false;
         }
-    }     
+    } 
+});
+codigo.addEventListener('keydown', function(e)
+{
+    var key = e.keyCode; 
+    console.log(key);
+
+    if(key == 13) 
+    {
+        //tecla enter
+        siguienteFocus();
+    }
+    else if(key == 9) 
+    {
+        //tecla tab
+        e.preventDefault();
+        siguienteFocus();
+    }
     else if((key >= 48 && key <= 57) || (key >= 96 && key <= 105))
     {
         //numeros: teclado y teclado numerico   
     }    
-    else if(key == 37 || key == 39 || key == 8 || key == 46 || key == 9)
+    else if(key == 37 || key == 39 || key == 8 || key == 46)
     {
         //izquierda, derecha, suprimir, borrar, tab
     }
     else
-    {
+    {        
         e.preventDefault();
     }
 });
+//NOMBRE
 nombre.addEventListener('keydown', function(e)
 {  
     var code = e.keyCode;
@@ -258,16 +195,16 @@ nombre.addEventListener('keydown', function(e)
         if(nombre.value != '') 
         { 
             siguienteFocus();
-        }
-        else 
-        {
-            //...
-        }       
+        }     
     }
-    else
+});
+//CANTIDAD
+cantidad.addEventListener('input', function()
+{   
+    if(cantidad.value.length > 3)
     {
-        //...
-    }
+        cantidad.value = cantidad.value.substring(0,3);
+    } 
 });
 cantidad.addEventListener('keydown', function(e)
 {
@@ -279,10 +216,6 @@ cantidad.addEventListener('keydown', function(e)
         {
             siguienteFocus();
         }
-        else
-        {
-            //...
-        }
     }     
     else if((key >= 48 && key <= 57) || (key >= 96 && key <= 105))
     {
@@ -297,15 +230,19 @@ cantidad.addEventListener('keydown', function(e)
         e.preventDefault();
     }
 });
+
+//////////////////////////////////
 //SUMAR ITEMS
 function sumarItems()
 {
     var suma = 0;
     var cantidades = document.querySelectorAll('.cantidad');
-    cantidades.forEach(function(numero)
+
+    cantidades.forEach(function(e)
     {
-        suma = parseInt(numero.innerHTML) + suma;            
+        suma = parseInt(e.innerHTML) + suma;            
     });
+
     total.innerHTML = 'TOTAL ITEM: '+suma;
 }
 //LIMPIAR
@@ -322,8 +259,8 @@ function limpiarDatos()
 }
 botonLimpiar.addEventListener('click', function()
 { 
-    var filas = tbody.rows.length;
-    
+    var filas = tbody.rows.length;  
+
     if(filas > 0)
     {
         var confirmar = confirm('¿LIMPIAR INFORMACION?');
@@ -335,55 +272,9 @@ botonLimpiar.addEventListener('click', function()
             sumarItems();
             limpiarDatos();
         }
-        else
-        {
-            //...
-        }
-    }
-    else
-    {
-        //...
     }
 });
 //AGREGAR ITEM
-botonAgregar.addEventListener('click', function() 
-{
-    if(codigo.value !='' && codigo.value.length == 5 && nombre.value !='' && cantidad.value !='')
-    {
-        var nuevoNombre = nombre.value;
-
-        if(nombre.disabled == true)
-        {
-            //..
-        }
-        else
-        {
-            nuevoNombre = nuevoNombre+' (*)';
-        } 
-        
-        if(estadoDefecto.checked == true)
-        {
-            if(defecto.value != 0)
-            {
-                var tipoDefecto = defecto.options[defecto.selectedIndex].text;
-                nuevoNombre = nuevoNombre+' (DEFECTO: '+tipoDefecto+')';
-                agregarItem(codigo.value, nuevoNombre, cantidad.value, '1');
-            }
-            else
-            {
-                siguienteFocus();
-            }            
-        }
-        else
-        {
-            validarItem(codigo.value, nuevoNombre, cantidad.value);
-        }
-    }
-    else
-    {
-        siguienteFocus();
-    } 
-});
 function validarItem(codigo, nombre, cantidad)
 {
     var numeroFilas = tbody.rows.length;
@@ -423,6 +314,40 @@ function validarItem(codigo, nombre, cantidad)
         agregarItem(codigo, nombre, cantidad, '0');
     } 
 }
+botonAgregar.addEventListener('click', function() 
+{
+    if(codigo.value !='' && codigo.value.length == 5 && nombre.value !='' && cantidad.value !='')
+    {
+        var nuevoNombre = nombre.value;
+
+        if(nombre.disabled == false)
+        {
+            nuevoNombre = nuevoNombre+' (*)';
+        }
+        
+        if(estadoDefecto.checked == true)
+        {
+            if(defecto.value != 0)
+            {
+                var tipoDefecto = defecto.options[defecto.selectedIndex].text;
+                nuevoNombre = nuevoNombre+' (DEFECTO: '+tipoDefecto+')';
+                agregarItem(codigo.value, nuevoNombre, cantidad.value, '1');
+            }
+            else
+            {
+                siguienteFocus();
+            }            
+        }
+        else
+        {
+            validarItem(codigo.value, nuevoNombre, cantidad.value);
+        }
+    }
+    else
+    {
+        siguienteFocus();
+    } 
+});
 function agregarItem(codigo, nombre, cantidad, estado)
 {
     var row = tbody.insertRow(0);
@@ -463,6 +388,7 @@ function eliminarCelda(e)
     tr.parentNode.removeChild(tr); 
     sumarItems();
 }
+//ORDENAR ITEM POR NOMBRE ASCENDENTE
 itemEncabezado.addEventListener('click', function() 
 {
     var filas = tbody.rows.length;
@@ -489,7 +415,7 @@ botonBuscar.addEventListener('click', function()
 m1Cerrar.addEventListener('click', function() 
 { 
     modal1.style.display = 'none';
-
+    
     m1Tbody.innerHTML = '';        
     m1Consulta.value = ''; 
 });
@@ -599,8 +525,20 @@ function m2BuscarItem()
         m2Codigo.value='';
         m2Nombre.value='';
         alert('ERROR LECTURA CODIGO');
+        m2Codigo.focus();
     }
 }
+m2Codigo.addEventListener('input', function()
+{
+    if(m2Codigo.value.length < 5)
+    {
+        m2Nombre.value = '';
+    }
+    if(m2Codigo.value.length > 5)
+    {
+        m2Codigo.value = m2Codigo.value.substring(0,5);
+    } 
+});
 m2Codigo.addEventListener('keydown', function(e)
 {    
     var key = e.keyCode; 
@@ -620,7 +558,7 @@ m2Codigo.addEventListener('keydown', function(e)
     {
         //numeros: teclado y teclado numerico   
     }    
-    else if(key == 37 || key == 39 || key == 8 || key == 46 || key == 9)
+    else if(key == 37 || key == 39 || key == 8 || key == 46)
     {
         //izquierda, derecha, suprimir, borrar, tab
     }
