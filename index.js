@@ -159,7 +159,6 @@ codigo.addEventListener('input', function()
 codigo.addEventListener('keydown', function(e)
 {
     var key = e.keyCode; 
-    console.log(key);
 
     if(key == 13) 
     {
