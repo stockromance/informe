@@ -653,8 +653,49 @@ function sortTable(nombreTabla)
 //CREAR PDF
 botonCrear.addEventListener('click', function() 
 { 
-    crearPDF(); 
+    //crearPDF(); 
+    crearXLS();
 });
+function crearXLS() 
+{
+    sortTable(tabla);
+    var table = document.getElementById('tbody');
+    var rows = table.getElementsByTagName('tr');
+    
+    var data = [];
+    
+    var titulo = [];
+    titulo.push('CODIGO');
+    titulo.push('NOMBRE');
+    titulo.push('CANTIDAD');
+    data.push(titulo);
+
+    for (var i = 0; i < rows.length; i++) {
+      var rowData = [];
+      var cells = rows[i].getElementsByTagName('td');
+      
+      rowData.push(cells[0].innerText); // Columna 1
+      rowData.push(cells[1].innerText); // Columna 2
+      rowData.push(cells[2].innerText); // Columna 3
+      
+      data.push(rowData);
+    }   
+
+    var wb = XLSX.utils.book_new();
+    var ws = XLSX.utils.aoa_to_sheet(data);
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet 1');
+    
+    var wbout = XLSX.write(wb, {bookType: 'xlsx', type: 'binary'});
+    
+    function s2ab(s) {
+      var buf = new ArrayBuffer(s.length);
+      var view = new Uint8Array(buf);
+      for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF;
+      return buf;
+    }
+    
+    saveAs(new Blob([s2ab(wbout)], {type: 'application/octet-stream'}), 'tabla.xlsx');
+}
 function crearPDF()
 {
     var textoTipoInforme = tipoInforme.options[tipoInforme.selectedIndex].text;
