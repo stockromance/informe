@@ -665,18 +665,18 @@ function crearXLS()
     var data = [];
     
     var titulo = [];
-    titulo.push('CODIGO');
-    titulo.push('NOMBRE');
-    titulo.push('CANTIDAD');
+    titulo.push('codigo');
+    titulo.push('nombre');
+    titulo.push('cantidad');
     data.push(titulo);
 
     for (var i = 0; i < rows.length; i++) {
       var rowData = [];
       var cells = rows[i].getElementsByTagName('td');
       
-      rowData.push(cells[0].innerText); // Columna 1
-      rowData.push(cells[1].innerText); // Columna 2
-      rowData.push(cells[2].innerText); // Columna 3
+      rowData.push(cells[0].innerText.toLowerCase()); // Columna 1
+      rowData.push(cells[1].innerText.toLowerCase()); // Columna 2
+      rowData.push(cells[2].innerText.toLowerCase()); // Columna 3
       
       data.push(rowData);
     }   
